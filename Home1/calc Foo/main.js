@@ -28,13 +28,14 @@ function bracket(str) {
         console.log();
         str = str.split('');
         str.map((el, i) => i === openBracket ? str.splice(i, (closeBracket - openBracket + 1), solution) : el)
-        return str
-
-        console.log(calculated(str.slice(openBracket + 1, closeBracket)))
+        str = str.join("")
+        return bracket(str)
+    }
+    else{
+      return calculated(str)
     }
 
-
-
+}
 
 
     function calculated(reg) {
@@ -131,7 +132,8 @@ function bracket(str) {
         }
 
     }
-}
+
+
 
 
 console.log(bracket(reg))
