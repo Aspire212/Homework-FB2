@@ -10,7 +10,7 @@ function giveMeAnswer() {
     let countOpen = countBracket(reg.value, '(');
     let countClose = countBracket(reg.value, ')');
     if (countOpen !== countClose) {
-      return answer.textContent = 'Вы не верно ввели выражение(не хватает скобок)!!!!';
+        return answer.textContent = 'Вы не верно ввели выражение(не хватает скобок)!!!!';
     }
     if (reg.value.length !== 0 && countOpen === countClose) {
         let regValue = reg.value.split('');
