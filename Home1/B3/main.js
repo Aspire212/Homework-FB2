@@ -43,7 +43,6 @@ function bracket(str) {
     } else {
         return calculated(str);
     }
-    console.log(1)
 
     function calculated(reg) {
         reg = reg.split("");
