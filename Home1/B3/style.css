@@ -1,0 +1,17 @@
+body {
+    background: palegreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.center {
+    max-width: 1200px;
+    margin: 100px auto;
+}
+
+.answer {
+    width: 400px;
+    height: 50px;
+}

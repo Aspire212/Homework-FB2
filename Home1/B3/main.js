@@ -1,63 +1,61 @@
 'use strict'
-let reg = "2+2+(3+1+(2-1*(6/2)))"
+const reg = document.querySelector('#reg');
+const send = document.querySelector('#send');
+const answer = document.querySelector('.answer')
 const sign = ["+", "-", "*", "/", "=", "&divide;", "&times;", "."];
-reg = reg.split("").filter(el => el !== " ").join("");
 
-console.log(reg)
+send.addEventListener('click', giveMeAnswer)
 
-
-//функция чтобы добраться до самых глубоких скоок  
-
-// переделать  через lastIndexOf 
-/*function brekit(str) {
-    let sub = str;
-    if (!sub.substr(1).includes("(")) {
-        let newStr = sub.slice(1, sub.indexOf(")"));
-        let oldStr = sub.slice(0, sub.indexOf(")") + 1);
-        return reg.replace(oldStr, calculated(newStr));
-    } else {
-        return brekit(sub.substr(1));
+function giveMeAnswer() {
+    let countOpen = countBracket(reg.value, '(')
+    let countClose = countBracket(reg.value, ')')
+    if (countOpen !== countClose) {
+        answer.textContent = 'Вы не верно ввели выражение(не хватает скобок)!!!!';
     }
-} */
+    if (reg.value.length !== 0 && countOpen === countClose) {
+        console.log(1)
+        let regValue = reg.value.split('');
+        regValue.filter(el => el !== " ");
+        regValue.map((el, i) => el === '(' && !isNaN(regValue[i - 1]) ? regValue.splice(i - 1, 2, (regValue[i - 1] + '*' + el)) : el);
+        regValue = regValue.join('');
+        answer.textContent = `Выражение равно ${bracket(regValue)}`;
+    } else {
+        answer.textContent = 'Вы ничего не ввели!!!!';
+    }
+}
+//функция для проверки скобок
+function countBracket(str, bracket) {
+    let counter = 0;
+    str = str.split('');
+    str.forEach(el => el === bracket && counter++);
+    return counter;
+}
+
 
 function bracket(str) {
     if (str.includes('(')) {
         let openBracket = str.lastIndexOf('(');
         let closeBracket = str.indexOf(')');
-        let solution = calculated(str.slice(openBracket + 1, closeBracket))
-        console.log();
+        let solution = calculated(str.slice(openBracket + 1, closeBracket));
         str = str.split('');
-        str.map((el, i) => i === openBracket ? str.splice(i, (closeBracket - openBracket + 1), solution) : el)
-        str = str.join("")
-        return bracket(str)
+        str.map((el, i) => i === openBracket ? str.splice(i, (closeBracket - openBracket + 1), solution) : el);
+        str = str.join("");
+        return bracket(str);
+    } else {
+        return calculated(str);
     }
-    else{
-      return calculated(str)
-    }
-
-}
-
 
     function calculated(reg) {
-        reg = reg.split("")
-        reg = creteArray(reg)
+        reg = reg.split("");
+        reg = creteArray(reg);
         searchDot(reg, ".");
-        //минус ф-ция
-
-        //reg = reg.map(el => isNaN(el) ? el : +el)
-        // преобр
-
         operation(reg, sign[3], sign[2]); //сразу "* и /"
-        operation(reg, sign[1], sign[0])
-
-        return reg.toString()
-
-
+        operation(reg, sign[1], sign[0]);
+        return reg.toString();
         //функции
-
         //split строки
         function creteArray(arr) {
-            let temp = ""
+            let temp = "";
             let changeArr = [];
             arr.forEach(el => {
                 if (isNaN(el)) {
@@ -71,21 +69,16 @@ function bracket(str) {
                 }
             });
             !!temp.length && changeArr.push(temp);
-            changeArr.filter((el, i) => changeArr[i] == '+' && changeArr[i + 1] == '-' ? changeArr.splice(i, 1) : false)
+            changeArr.filter((el, i) => isNaN(changeArr[i]) && changeArr[i - 1] == '-' ? changeArr.splice(i, 1) : false);
             return concatMinus(changeArr);
         }
-
+        //склеиваю минус с числом
         function concatMinus(arr) {
-            arr.map((el, i) => {
-                if (el === "-" && arr[i - 1] !== '+') {
-                    arr.splice(i, 2, (-arr[i + 1]));
-                    i !== 0 && arr.splice(i, 0, '+');
-                }
-            });
-            //console.log(arr, 'chan')
+            arr.map((el, i) => el === "-" && arr.splice(i, 2, -arr[i + 1]));
+            arr.map((el, i) => !isNaN(el) && !isNaN(arr[i - 1]) && arr.splice(i, 0, '+'));
             return arr;
         }
-        //-------------
+
         function searchDot(arr, sym) {
             arr.map((el, i) => {
                 el === sym ? el = arr.splice(i - 1, 3, (arr[i - 1] + arr[i] + arr[i + 1])) : false;
@@ -107,7 +100,6 @@ function bracket(str) {
                 }
             })
         }
-
         //решение выражения
         function equals(num1, op, num2) {
             let newNum;
@@ -132,18 +124,4 @@ function bracket(str) {
         }
 
     }
-
-
-
-
-console.log(bracket(reg))
-
-
-
-/*function repl(str) {
-    return str.split("").some(el => el !== "(") ? calculated(str) : repl(brekit(str))
-
-}*/
-
-
-//вставить все функцми
+}
