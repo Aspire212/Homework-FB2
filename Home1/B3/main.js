@@ -13,7 +13,6 @@ function giveMeAnswer() {
         answer.textContent = 'Вы не верно ввели выражение(не хватает скобок)!!!!';
     }
     if (reg.value.length !== 0 && countOpen === countClose) {
-        console.log(1)
         let regValue = reg.value.split('');
         regValue.filter(el => el !== " ");
         regValue.map((el, i) => el === '(' && !isNaN(regValue[i - 1]) ? regValue.splice(i - 1, 2, (regValue[i - 1] + '*' + el)) : el);
