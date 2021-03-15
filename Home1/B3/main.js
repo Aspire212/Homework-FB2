@@ -7,19 +7,19 @@ const sign = ["+", "-", "*", "/", "=", "&divide;", "&times;", "."];
 send.addEventListener('click', giveMeAnswer)
 
 function giveMeAnswer() {
-    let countOpen = countBracket(reg.value, '(')
-    let countClose = countBracket(reg.value, ')')
+    let countOpen = countBracket(reg.value, '(');
+    let countClose = countBracket(reg.value, ')');
     if (countOpen !== countClose) {
-        answer.textContent = 'Вы не верно ввели выражение(не хватает скобок)!!!!';
+      return answer.textContent = 'Вы не верно ввели выражение(не хватает скобок)!!!!';
     }
     if (reg.value.length !== 0 && countOpen === countClose) {
         let regValue = reg.value.split('');
         regValue.filter(el => el !== " ");
         regValue.map((el, i) => el === '(' && !isNaN(regValue[i - 1]) ? regValue.splice(i - 1, 2, (regValue[i - 1] + '*' + el)) : el);
         regValue = regValue.join('');
-        answer.textContent = `Выражение равно ${bracket(regValue)}`;
+        return answer.textContent = `Выражение равно ${bracket(regValue)}`;
     } else {
-        answer.textContent = 'Вы ничего не ввели!!!!';
+        return answer.textContent = 'Вы ничего не ввели!!!!';
     }
 }
 //функция для проверки скобок
