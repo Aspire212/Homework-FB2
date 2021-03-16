@@ -1,14 +1,18 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-  background: #4B4F7B;
+body {
+    background: #4B4F7B;
+    width: 100vw;
+    font-family: 'Arial', sans-serif;
+    font-weight: 500;
+    overflow-x: hidden;
 }
 
-input{
+input {
     margin: 10px;
     width: 380px;
     height: 40px;
@@ -16,21 +20,21 @@ input{
     padding: 2px 5px;
 }
 
-textarea{
-  margin: 10px;
-  width: 380px;
-  height: 400px;
-  border-radius: 4px;
-  padding: 2px 5px;
+textarea {
+    margin: 10px;
+    width: 380px;
+    height: 400px;
+    border-radius: 4px;
+    padding: 2px 5px;
 }
 
-.required{
-  border: solid 2px red;
+.required {
+    border: solid 2px red;
 }
 
 button {
     margin: 10px;
-    width: 120px;
+    width: 140px;
     height: 40px;
     font-size: 16px;
     border-radius: 4px;
@@ -40,22 +44,55 @@ button {
     border-radius: 2px;
     color: #D8D9E1;
 }
+
 button:active {
-  color: #DDDDDD;
-  box-shadow: 0 0 10px #DDDDDD;
+    color: #DDDDDD;
+    box-shadow: 0 0 10px #DDDDDD;
 }
+
+.allInput {
+    width: 100vw;
+    height: 100vh;
+    background: #4B4F7B;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: -100%;
+    transition: right 1s ease-in-out;
+}
+
+.allInput p {
+    color: white;
+    font-size: 20px;
+}
+
+.allInputActive {
+    right: 0;
+}
+
+.startScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
 .par {
     display: flex;
     flex-wrap: wrap;
 }
 
 .card {
-    width: 400px;
-    height: 1000px;
+    width: 360px;
+    height: 500px;
     background: #9FA0A9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin: 10px;
     border-radius: 5px;
     color: white;
@@ -63,44 +100,53 @@ button:active {
 }
 
 .wrapperImg {
-  border-radius: 5px;
-  height: 600px;
-  width: 390px;
-  overflow: hidden;
+    border-radius: 5px;
+    height: 290px;
+    width: 350px;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .card img {
-    object-fit: contain;
-    width: 390px;
-    min-height: 400px;
+    object-fit: cover;
+    max-width: 340px;
+    max-height: 290px;
 }
 
 .price {
-    margin: 10px auto;
+    margin: 10px;
     font-size: 25px;
+    text-align: center;
 }
 
 .desk {
-    width: 380px;
-    height: 400px;
+    width: 340px;
+    height: 80px;
     padding: 10px;
-    font-size: 20px;
-}
-.catalog{
-  width: 100vw;
-  min-height: 100vh;
-  position: absolute;
-  top: 0;
-  left: -150%;
-  background: #4B4F7B;
-  transition: left 1s ease-in-out;
+    font-size: 16px;
+    text-align: center;
 }
 
-.catalogActive{
-  left: 0;
+.card button {
+    display: block;
+    margin: 0 auto;
 }
 
-.headerCatalog{
-  width: 100%;
-  height: 100px;
+.catalog {
+    width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: -150%;
+    background: #4B4F7B;
+    transition: left 1s ease-in-out;
+}
+
+.catalogActive {
+    left: 0;
+}
+
+.headerCatalog {
+    width: 100%;
+    height: 100px;
 }
