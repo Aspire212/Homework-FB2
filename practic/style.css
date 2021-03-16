@@ -1,12 +1,49 @@
-input {
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: #4B4F7B;
+}
+
+input{
     margin: 10px;
-    width: 300px;
+    width: 380px;
+    height: 40px;
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+textarea{
+  margin: 10px;
+  width: 380px;
+  height: 400px;
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+.required{
+  border: solid 2px red;
 }
 
 button {
     margin: 10px;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+    background: #28B099;
+    border: none;
+    border-radius: 2px;
+    color: #D8D9E1;
 }
-
+button:active {
+  color: #DDDDDD;
+  box-shadow: 0 0 10px #DDDDDD;
+}
 .par {
     display: flex;
     flex-wrap: wrap;
@@ -14,10 +51,9 @@ button {
 
 .card {
     width: 400px;
-    height: 600px;
-    background: rgb(13, 170, 123);
+    height: 1000px;
+    background: #9FA0A9;
     display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
     margin: 10px;
@@ -26,14 +62,17 @@ button {
     padding: 10px;
 }
 
-img {
-    object-fit: contain;
-    width: 380px;
-    min-height: 300px;
+.wrapperImg {
+  border-radius: 5px;
+  height: 600px;
+  width: 390px;
+  overflow: hidden;
 }
 
-.img {
-    border-radius: 5px;
+.card img {
+    object-fit: contain;
+    width: 390px;
+    min-height: 400px;
 }
 
 .price {
@@ -46,4 +85,22 @@ img {
     height: 400px;
     padding: 10px;
     font-size: 20px;
+}
+.catalog{
+  width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: -150%;
+  background: #4B4F7B;
+  transition: left 1s ease-in-out;
+}
+
+.catalogActive{
+  left: 0;
+}
+
+.headerCatalog{
+  width: 100%;
+  height: 100px;
 }

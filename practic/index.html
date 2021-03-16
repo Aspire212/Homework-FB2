@@ -8,16 +8,23 @@
     <title>Document</title>
 </head>
 <div class="header"></div>
-<div>
-    <div><input id='imgUrl' type="text" placeholder="Ввведите URL картинки"></div>
-    <div> <input id='price' type="text" placeholder='Введите цену'></div>
-    <div><input id='desk' type="text" placeholder="Описание"></div>
-    <div><input id='id' ctype="text" placeholder="Введите уникальный номер"></div>
-    <button id='btn'>Отправить</button>
+<div class="allInput">
+    <div><input class="input" id='imgUrl' type="text" placeholder="Ввведите URL картинки"></div>
+    <div> <input class="input" id='price' type="text" placeholder='Введите цену'></div>
+    <div><textarea class="input" id='desk' type="text" placeholder="Введите описание товара"></textarea> </div>
+    <div><input class="input" id='id' ctype="text" placeholder="Введите уникальный номер"></div>
 </div>
-<button id="btnCreate">Отрисовать</button>
+<button id='btn'>Отправить</button>
+<button id="btnCreate">Каталог</button>
+<div class="catalog">
+  <div class="headerCatalog">
+    <button class="sortUp">Возрастание</button>
+    <button class="sortLow">Убывание</button>
+    <button class="closeCatalog">&times;</button>
 
-<div class='par'></div>
+  </div>
+  <div class='par'></div>
+</div>
 
 
 <body>
