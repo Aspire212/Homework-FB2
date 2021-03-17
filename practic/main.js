@@ -15,6 +15,8 @@ function shop() {
     const headerCatalog = catalog.querySelector('.headerCatalog');
     const btnAdd = document.querySelector('#btnAdd');
     const closeAddMenu = document.querySelector('#closeAddMenu');
+    const goToBasket = document.querySelector('#goToBasket');
+    
 
     /*шаблон
     {
@@ -74,7 +76,9 @@ function shop() {
     closeAddMenu.addEventListener('click', closeAddItem);
     btnCreate.addEventListener('click', createCard);
     headerCatalog.addEventListener('click', sortCatalog);
-
+    par.addEventListener('click', addInBasket)
+    
+    
 
     function createAndPush() {
         let obj = {}; // Доделать!!!!!
@@ -158,7 +162,8 @@ function shop() {
     }
     //добавление товара в массив корзины
     function addInBasket(e) {
-      let sKey = e.target.parentElement.classList.contains('card') ? e.target.dataset.key : false;
+      goToBasket.firstElementChild.textContent = ` : ${basketArr.length + 1}`;
+      let sKey = e.target.parentElement.classList.contains('card') ? e.target.parentElement.dataset.id : false;
       if (sKey) {
         arr.forEach(obj => Object.values(obj).forEach(val => val === sKey ? basketArr.push(obj) : false));
         return basketArr;
