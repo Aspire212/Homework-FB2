@@ -16,7 +16,7 @@ function shop() {
     const btnAdd = document.querySelector('#btnAdd');
     const closeAddMenu = document.querySelector('#closeAddMenu');
     const goToBasket = document.querySelector('#goToBasket');
-
+    const basket = document.querySelector('.basket');
 
     /*шаблон
     {
@@ -77,7 +77,7 @@ function shop() {
     btnCreate.addEventListener('click', createCard);
     headerCatalog.addEventListener('click', sortCatalog);
     par.addEventListener('click', addInBasket)
-
+    goToBasket.addEventListener('click', openBasket)
 
 
     function createAndPush() {
@@ -169,6 +169,10 @@ function shop() {
             return basketArr;
         }
         return;
+    }
+    
+    function openBasket(){
+      basket.classList.add('active')
     }
 
 }
