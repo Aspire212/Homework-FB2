@@ -60,7 +60,7 @@ function shop() {
             imgUrl: "img/frindesit.jpg",
             price: "500$",
             desk: "Мощность, оснащение, размер.Цена.",
-            id: 2,
+            id: 3,
         }, {
             imgUrl: "img/tvsams.jpg",
             price: "800$",
@@ -148,7 +148,6 @@ function shop() {
         type ? arr.sort((a, b) => a.getAttribute(data) - b.getAttribute(data)) : arr.sort((a, b) => b.getAttribute(data) - a.getAttribute(data));
         let output = "";
         arr.forEach(el => output += el.outerHTML);
-        console.log(arr)
         return parent.innerHTML = output;
     }
     //функция очищающая каталог после его закрытия, для избнжания дублирования элементов
