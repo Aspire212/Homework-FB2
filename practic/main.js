@@ -25,7 +25,6 @@ function shop() {
     }
     */
 
-    //mw микроволноака
 
     let arr = [
 
@@ -33,7 +32,7 @@ function shop() {
             imgUrl: "img/lgmw.jpg",
             price: "250$",
             desk: "Отличительная особенность микроволновок LG – удивительно точный подбор нужной мощности.",
-            id: 2,
+            id: "mw01",
         },
 
 
@@ -41,34 +40,34 @@ function shop() {
             imgUrl: "img/horizont.jpeg",
             price: '300$',
             desk: "LCD-телевизор с диагональю экрана 55 дюймов, Ultra HD разрешением и функцией SMART-TV",
-            id: 1,
+            id: "tv01",
         },
 
         {
             imgUrl: "img/atlant.jpg",
             price: '500$',
             desk: "Однокамерный холодильник с дисплеем, электронное управление, зона свежести, класс A+",
-            id: 3,
+            id: "fr01",
         },
         {
             imgUrl: "img/midea.jpeg",
             price: "150$",
             desk: "25-литров объёма. Нержавейка внутри и снаружи. Местный производитель и гарантия",
-            id: 2,
+            id: "mw02",
         },
         {
             imgUrl: "img/frindesit.jpg",
             price: "500$",
             desk: "Мощность, оснащение, размер.Цена.",
-            id: 3,
+            id: "fr02",
         }, {
             imgUrl: "img/tvsams.jpg",
             price: "800$",
             desk: "Мощность, оснащение, размер.Цена.",
-            id: 1,
+            id: "tv02",
         },
     ];
-
+    let basketArr = [];
     //События
     btn.addEventListener('click', createAndPush);
     btnAdd.addEventListener('click', openAddItem);
@@ -84,6 +83,7 @@ function shop() {
         obj.price = price.value;
         obj.desk = desk.value;
         obj.id = id.value;
+        Object.values(obj)//!
         arr.push(obj);
         setTimeout(() => clearForm(), 1000);
     }
@@ -145,7 +145,7 @@ function shop() {
     //функция сортировки HTML коллекции
     function sortCol(parent, collection, data, type = true) {
         let arr = [...collection];
-        type ? arr.sort((a, b) => a.getAttribute(data) - b.getAttribute(data)) : arr.sort((a, b) => b.getAttribute(data) - a.getAttribute(data));
+        type ? arr.sort((a, b) => a.getAttribute(data).charCodeAt() - b.getAttribute(data).charCodeAt()) : arr.sort((a, b) => b.getAttribute(data).charCodeAt() - a.getAttribute(data).charCodeAt());
         let output = "";
         arr.forEach(el => output += el.outerHTML);
         return parent.innerHTML = output;
@@ -154,7 +154,16 @@ function shop() {
     function clearCatalog(collection) {
         const allCards = document.querySelectorAll('.card')
         catalog.classList.remove('catalogActive');
-        collection.forEach(el => el.remove())
+        collection.forEach(el => el.remove());
+    }
+    //добавление товара в массив корзины
+    function addInBasket(e) {
+      let sKey = e.target.parentElement.classList.contains('card') ? e.target.dataset.key : false;
+      if (sKey) {
+        arr.forEach(obj => Object.values(obj).forEach(val => val === sKey ? basketArr.push(obj) : false));
+        return basketArr;
+      }
+      return;
     }
 
 }
