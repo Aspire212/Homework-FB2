@@ -16,7 +16,7 @@ function shop() {
     const btnAdd = document.querySelector('#btnAdd');
     const closeAddMenu = document.querySelector('#closeAddMenu');
     const goToBasket = document.querySelector('#goToBasket');
-    
+
 
     /*шаблон
     {
@@ -77,8 +77,8 @@ function shop() {
     btnCreate.addEventListener('click', createCard);
     headerCatalog.addEventListener('click', sortCatalog);
     par.addEventListener('click', addInBasket)
-    
-    
+
+
 
     function createAndPush() {
         let obj = {}; // Доделать!!!!!
@@ -87,7 +87,7 @@ function shop() {
         obj.price = price.value;
         obj.desk = desk.value;
         obj.id = id.value;
-        Object.values(obj)//!
+        Object.values(obj) //!
         arr.push(obj);
         setTimeout(() => clearForm(), 1000);
     }
@@ -162,13 +162,13 @@ function shop() {
     }
     //добавление товара в массив корзины
     function addInBasket(e) {
-      goToBasket.firstElementChild.textContent = ` : ${basketArr.length + 1}`;
-      let sKey = e.target.parentElement.classList.contains('card') ? e.target.parentElement.dataset.id : false;
-      if (sKey) {
-        arr.forEach(obj => Object.values(obj).forEach(val => val === sKey ? basketArr.push(obj) : false));
-        return basketArr;
-      }
-      return;
+        goToBasket.firstElementChild.textContent = ` : ${basketArr.length + 1}`;
+        let sKey = e.target.parentElement.classList.contains('card') ? e.target.parentElement.dataset.id : false;
+        if (sKey) {
+            arr.forEach(obj => Object.values(obj).forEach(val => val === sKey ? basketArr.push(obj) : false));
+            return basketArr;
+        }
+        return;
     }
 
 }

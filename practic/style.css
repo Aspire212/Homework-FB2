@@ -153,64 +153,64 @@ button:active {
     display: flex;
     justify-content: space-between;
 }
-.basket{
-  width: 100vw;
-  height: 100vh;
-  background: red;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  transform: translateY(-100%);
+
+.basket {
+    width: 100vw;
+    height: 100vh;
+    background: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transform: translateY(-100%);
 }
 
-#closeAddMenu{
-  display: flex;
-  align-self: flex-end;
-  margin-right: 0px;
+#closeAddMenu {
+    display: flex;
+    align-self: flex-end;
+    margin-right: 0px;
 }
+
 #closeAddMenu,
-.closeCatalog{
-  width: 50px;
-  height: 40px;
-  font-size: 40px;
-  background: transparent;
-  border: none;
-  transition: all .2s linear;
+.closeCatalog {
+    width: 50px;
+    height: 40px;
+    font-size: 40px;
+    background: transparent;
+    border: none;
+    transition: all .2s linear;
 }
+
 #closeAddMenu:active,
-.closeCatalog:active{
-  box-shadow: none;
-  color: rgba(255, 0, 0, 0.3);
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+.closeCatalog:active {
+    box-shadow: none;
+    color: rgba(255, 0, 0, 0.3);
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
 }
 
 .sortUp,
-.sortLow{
-  width: 0;
-  height: 0;
-  border: 15px solid transparent;
-  background: none;
-  transition: all .2s linear;
-
+.sortLow {
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    background: none;
+    transition: all .2s linear;
 }
 
-.sortUp{
-  border-bottom: 15px solid #DDDDDD;
-
+.sortUp {
+    border-bottom: 15px solid #DDDDDD;
 }
-.sortLow{
-  border-top: 15px solid #DDDDDD;
 
-
+.sortLow {
+    border-top: 15px solid #DDDDDD;
 }
-.sortUp:active{
-  border-bottom-color: rgba(255, 0, 0, 0.3);
-  box-shadow: 0 0 rgba(255, 0, 0, 0.3);
+
+.sortUp:active {
+    border-bottom-color: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 rgba(255, 0, 0, 0.3);
 }
 
 .sortLow:active {
-  border-top-color: rgba(255, 0, 0, 0.3);
-  box-shadow: 0 0 rgba(255, 0, 0, 0.3);
+    border-top-color: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 rgba(255, 0, 0, 0.3);
 }
-
