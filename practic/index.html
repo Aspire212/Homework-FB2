@@ -2,44 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
 </head>
-<div class="header"></div>
-<div class="startScreen">
+
+<body>
+  <div class="header"></div>
+  
+  <div class="startScreen">
     <button id='btnAdd'>Добавить товар</button>
-    <button id="btnCreate">Каталог</button></div>
-<div class="allInput">
+    <button id="btnCreate">Каталог</button>
+  </div>
+  
+  <div class="allInput">
     <button id="closeAddMenu">&times;</button>
     <p>Добавть в товар в каталог</p>
-    <div><input class="input" id='imgUrl' type="text" placeholder="Ввведите URL картинки"></div>
-    <div> <input class="input" id='price' type="text" placeholder='Введите цену'></div>
-    <div><textarea class="input" id='desk' type="text" placeholder="Введите описание товара"></textarea> </div>
-    <div><input class="input" id='id' ctype="text" placeholder="Введите уникальный номер"></div>
+    <div>
+      <input class="input" id='imgUrl' type="text" placeholder="Ввведите URL картинки">
+    </div>
+    <div>
+      <input class="input" id='price' type="text" placeholder='Введите цену'>
+    </div>
+    <div>
+      <textarea class="input" id='desk' type="text" placeholder="Введите описание товара"></textarea>
+    </div>
+    <div>
+      <input class="input" id='id' ctype="text" placeholder="Введите уникальный номер">
+    </div>
     <button id='btn'>Добавить</button>
-</div>
-<div class="catalog">
+  </div>
+  
+  <div class="catalog">
     <div class="headerCatalog">
       <div>
         <p>Сортировать по: </p>
         <button class="sortUp"></button>
         <button class="sortLow"></button>
       </div>
-        <button class="closeCatalog">&times;</button>
+      <button class="closeCatalog">&times;</button>
     </div>
     <div class='par'></div>
-</div>
-<div class="basket">
-  <div class="basketHeader">
-    
   </div>
   
-</div>
+  <div class="basket">
+    <div class="basketHeader">
 
-<body>
-    <script src="main.js"></script>
+    </div>
+
+  </div>
+
+  <script src="main.js"></script>
 </body>
 
 </html>
