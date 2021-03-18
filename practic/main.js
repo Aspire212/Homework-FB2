@@ -88,12 +88,11 @@ function shop() {
 
     function createAndPush() {
         let obj = {}; // Доделать!!!!!
-
-        obj.imgUrl = imgUrl.value;
+        obj.imgUrl =  imgUrl.value;
         obj.price = price.value + '$';
         obj.desk = desk.value;
         obj.id = id.value;
-        Object.values(obj) //!
+        console.log(obj)
         arr.push(obj);
         setTimeout(() => clearForm(), 1000);
     }
@@ -166,7 +165,7 @@ function shop() {
     //добавление товара в массив корзины
     function addInBasket(e) {
          e.target.classList.contains('btnBasket') 
-        ? goToBasket.firstElementChild.textContent = ` : ${basketArr.length +1}`
+        ? goToBasket.nextElementSibling.textContent = `: ${basketArr.length +1}`
         : false;
         let sKey = e.target.parentElement.classList.contains('card') && e.target.classList.contains('btnBasket') ? e.target.parentElement.dataset.id : false;
         if (sKey) {
