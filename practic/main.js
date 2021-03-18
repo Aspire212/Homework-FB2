@@ -17,6 +17,12 @@ function shop() {
     const closeAddMenu = document.querySelector('#closeAddMenu');
     const goToBasket = document.querySelector('#goToBasket');
     const basket = document.querySelector('.basket');
+    const closeBasket = document.querySelector('.closeBasket');
+    const message = document.querySelector('.message ');
+    const basketPar = message.nextElementSibling;
+    const total = basketPar.nextElementSibling;
+    
+    let totalPrice = 0;
 
     /*шаблон
     {
@@ -76,15 +82,15 @@ function shop() {
     closeAddMenu.addEventListener('click', closeAddItem);
     btnCreate.addEventListener('click', createCard);
     headerCatalog.addEventListener('click', sortCatalog);
-    par.addEventListener('click', addInBasket)
-    goToBasket.addEventListener('click', openBasket)
-
+    par.addEventListener('click', addInBasket);
+    goToBasket.addEventListener('click', openBasket);
+    closeBasket.addEventListener('click', exitBasket);
 
     function createAndPush() {
         let obj = {}; // Доделать!!!!!
 
         obj.imgUrl = imgUrl.value;
-        obj.price = price.value;
+        obj.price = price.value + '$';
         obj.desk = desk.value;
         obj.id = id.value;
         Object.values(obj) //!
@@ -97,8 +103,6 @@ function shop() {
             el.value = ''
             el.classList.contains('required') && el.classList.remove('required');
         });
-
-
     }
 
     function openAddItem() {
@@ -110,11 +114,11 @@ function shop() {
     }
     //рендер функция карточек на страницу
     function createCard() {
-        arr.forEach(elem => createElem(elem));
+        arr.forEach(elem => createElem(elem, par));
         catalog.classList.add('catalogActive');
     }
     //функция создания карточки
-    function createElem(el) {
+    function createElem(el, parent) {
         let card = document.createElement('div');
         card.classList.add('card');
         card.dataset.id = el.id;
@@ -136,15 +140,15 @@ function shop() {
         card.append(price);
         card.append(desk);
         card.append(btnBasket);
-        par.append(card);
+        parent.append(card);
     }
     //переменная  allCards  создана в локальной области видимости для, того чтобы получить NodeList после его рендеринга
-    function sortCatalog(e) {
+    function sortCatalog(e, ) {
         let self = e.target;
-        const allCards = document.querySelectorAll('.card');
+        let allCards = document.querySelectorAll('.card');
         self.classList.contains('sortUp') && sortCol(par, allCards, 'data-id');
         self.classList.contains('sortLow') && sortCol(par, allCards, 'data-id', false);
-        self.classList.contains('closeCatalog') && clearCatalog(allCards);
+        self.classList.contains('closeCatalog') && clearCatalog(allCards, 'catalogActive');
     }
     //функция сортировки HTML коллекции
     function sortCol(parent, collection, data, type = true) {
@@ -155,15 +159,16 @@ function shop() {
         return parent.innerHTML = output;
     }
     //функция очищающая каталог после его закрытия, для избнжания дублирования элементов
-    function clearCatalog(collection) {
-        const allCards = document.querySelectorAll('.card')
-        catalog.classList.remove('catalogActive');
-        collection.forEach(el => el.remove());
+    function clearCatalog(collection, activeClass) {
+        catalog.classList.remove(activeClass);
+        setTimeout(() => collection.forEach(el => el.remove()), 1000);
     }
     //добавление товара в массив корзины
     function addInBasket(e) {
-        goToBasket.firstElementChild.textContent = ` : ${basketArr.length + 1}`;
-        let sKey = e.target.parentElement.classList.contains('card') ? e.target.parentElement.dataset.id : false;
+         e.target.classList.contains('btnBasket') 
+        ? goToBasket.firstElementChild.textContent = ` : ${basketArr.length +1}`
+        : false;
+        let sKey = e.target.parentElement.classList.contains('card') && e.target.classList.contains('btnBasket') ? e.target.parentElement.dataset.id : false;
         if (sKey) {
             arr.forEach(obj => Object.values(obj).forEach(val => val === sKey ? basketArr.push(obj) : false));
             return basketArr;
@@ -172,7 +177,32 @@ function shop() {
     }
     
     function openBasket(){
-      basket.classList.add('active')
+      catalog.classList.remove('catalogActive');
+      basket.classList.add('basketActive');
+      message.textContent = `${!!basketArr.length ? '' : 'Корзина пуста'}`;
+      if(!!basketArr.length){  
+        renderBasket();
+        basketArr.forEach(el => totalPrice += parseInt(el.price.slice(0, -1)))
+        total.textContent = totalPrice > 0 ? 'Общая сумма ' + totalPrice +  '$' : "";
+      }
+      
     }
-
+    function exitBasket() {
+      catalog.classList.add('catalogActive');
+      basket.classList.remove('basketActive');
+      let allCardsBasket = basketPar.querySelectorAll('.card');
+     setTimeout(() => {
+       allCardsBasket.forEach(el => 
+        el.remove());
+       totalPrice = 0;
+     }, 1000);
+  
+    }
+    
+    function renderBasket(){
+      basketArr.forEach(el => createElem(el, basketPar));
+    }
 }
+
+
+// clearcatalog => exit basket 
