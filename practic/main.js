@@ -2,12 +2,8 @@
 window.addEventListener('DOMContentLoaded', shop);
 
 function shop() {
-    const imgUrl = document.querySelector('#imgUrl');
-    const price = document.querySelector('#price');
-    const desk = document.querySelector('#desk');
-    const id = document.querySelector('#id');
     const btn = document.querySelector('#btn');
-    const btnСreate = document.querySelector('#btnCreate');
+    const btnCreate = document.querySelector('#btnCreate');
     const par = document.querySelector('.par');
     const allInput = document.querySelectorAll('.input');
     const addItem = document.querySelector('.allInput');
@@ -95,10 +91,10 @@ function shop() {
         Object.keys(objVal).some(el => {
             allInput.forEach(input => {
                 if (!objVal[el]) {
-                    input.id === el && toggleClas(input, 'red');
+                    input.id === el && toggleClass(input, 'red');
                     console.log('Заполните все поля')
                 } else {
-                    input.id === el && toggleClas(input, 'red', false);
+                    input.id === el && toggleClass(input, 'red', false);
                 }
             });
         });
@@ -109,7 +105,7 @@ function shop() {
     }
 
 
-    function toggleClas(elem, name, toggle = true) {
+    function toggleClass(elem, name, toggle = true) {
         toggle ? elem.classList.add(name) : elem.classList.remove(name);
     }
 
@@ -200,7 +196,6 @@ function shop() {
             arr.forEach(obj => Object.values(obj).forEach(val => val === sKey ? basketArr.push(obj) : false));
             return basketArr;
         }
-        return;
     }
 
     function openBasket() {
