@@ -86,7 +86,35 @@ function shop() {
     goToBasket.addEventListener('click', openBasket);
     closeBasket.addEventListener('click', exitBasket);
 
+
     function createAndPush() {
+      let objVal = {};
+      allInput.forEach(input => {
+        objVal[input.id] = input.value;
+      });
+      Object.keys(objVal).some(el => {
+        allInput.forEach(input => {
+          if (!objVal[el]) {
+            input.id === el && toggleClas(input, 'red');
+            console.log('Заполните все поля')
+          } else {
+            input.id === el && toggleClas(input, 'red', false);
+          }
+        });
+      });
+      if(Object.values(objVal).every(val => val.length > 0)){
+        arr.push(objVal);
+        clearForm();
+      }
+    }
+
+
+  function toggleClas(elem, name, toggle = true) {
+     toggle ? elem.classList.add(name) : elem.classList.remove(name);
+  }
+
+
+    /*function createAndPush() {
         let obj = {}; // Доделать!!!!!
         obj.imgUrl =  imgUrl.value;
         obj.price = price.value + '$';
@@ -95,7 +123,7 @@ function shop() {
         console.log(obj)
         arr.push(obj);
         setTimeout(() => clearForm(), 1000);
-    }
+    }*/
 
     function clearForm() {
         allInput.forEach(el => {

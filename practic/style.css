@@ -66,7 +66,9 @@ button:active {
     transform: translateX(-100%);
     transition: transform 1s ease-in-out;
 }
-
+.red{
+  border: 2px solid red;
+}
 .allInput p {
     color: white;
     font-size: 20px;
