@@ -34,7 +34,7 @@ function countBracket(str, bracket) {
 function bracket(str) {
     if (str.includes('(')) {
         let openBracket = str.lastIndexOf('(');
-        let closeBracket = str.indexOf(')');
+        let closeBracket = str.indexOf(')', openBracket);
         let solution = calculated(str.slice(openBracket + 1, closeBracket));
         str = str.split('');
         str.map((el, i) => i === openBracket ? str.splice(i, (closeBracket - openBracket + 1), solution) : el);
