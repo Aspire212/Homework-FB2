@@ -21,7 +21,7 @@ function shop() {
     const message = document.querySelector('.message ');
     const basketPar = message.nextElementSibling;
     const total = basketPar.nextElementSibling;
-    
+
     let totalPrice = 0;
 
     /*шаблон
@@ -39,7 +39,7 @@ function shop() {
         {
             imgUrl: "img/lgmw.jpg",
             price: "250$",
-            desk: "Отличительная особенность микроволновок LG – удивительно точный подбор нужной мощности.",
+            desk: "Отличительная особенность микроволновок LG - удивительно точный подбор нужной мощности.",
             id: "mw01",
         },
 
@@ -88,30 +88,30 @@ function shop() {
 
 
     function createAndPush() {
-      let objVal = {};
-      allInput.forEach(input => {
-        objVal[input.id] = input.value;
-      });
-      Object.keys(objVal).some(el => {
+        let objVal = {};
         allInput.forEach(input => {
-          if (!objVal[el]) {
-            input.id === el && toggleClas(input, 'red');
-            console.log('Заполните все поля')
-          } else {
-            input.id === el && toggleClas(input, 'red', false);
-          }
+            objVal[input.id] = input.value;
         });
-      });
-      if(Object.values(objVal).every(val => val.length > 0)){
-        arr.push(objVal);
-        clearForm();
-      }
+        Object.keys(objVal).some(el => {
+            allInput.forEach(input => {
+                if (!objVal[el]) {
+                    input.id === el && toggleClas(input, 'red');
+                    console.log('Заполните все поля')
+                } else {
+                    input.id === el && toggleClas(input, 'red', false);
+                }
+            });
+        });
+        if (Object.values(objVal).every(val => val.length > 0)) {
+            arr.push(objVal);
+            clearForm();
+        }
     }
 
 
-  function toggleClas(elem, name, toggle = true) {
-     toggle ? elem.classList.add(name) : elem.classList.remove(name);
-  }
+    function toggleClas(elem, name, toggle = true) {
+        toggle ? elem.classList.add(name) : elem.classList.remove(name);
+    }
 
 
     /*function createAndPush() {
@@ -192,9 +192,9 @@ function shop() {
     }
     //добавление товара в массив корзины
     function addInBasket(e) {
-         e.target.classList.contains('btnBasket') 
-        ? goToBasket.nextElementSibling.textContent = `: ${basketArr.length +1}`
-        : false;
+        e.target.classList.contains('btnBasket') ?
+            goToBasket.nextElementSibling.textContent = `: ${basketArr.length +1}` :
+            false;
         let sKey = e.target.parentElement.classList.contains('card') && e.target.classList.contains('btnBasket') ? e.target.parentElement.dataset.id : false;
         if (sKey) {
             arr.forEach(obj => Object.values(obj).forEach(val => val === sKey ? basketArr.push(obj) : false));
@@ -202,34 +202,35 @@ function shop() {
         }
         return;
     }
-    
-    function openBasket(){
-      catalog.classList.remove('catalogActive');
-      basket.classList.add('basketActive');
-      message.textContent = `${!!basketArr.length ? '' : 'Корзина пуста'}`;
-      if(!!basketArr.length){  
-        renderBasket();
-        basketArr.forEach(el => totalPrice += parseInt(el.price.slice(0, -1)))
-        total.textContent = totalPrice > 0 ? 'Общая сумма ' + totalPrice +  '$' : "";
-      }
-      
+
+    function openBasket() {
+        catalog.classList.remove('catalogActive');
+        basket.classList.add('basketActive');
+        message.textContent = `${!!basketArr.length ? '' : 'Корзина пуста'}`;
+        if (!!basketArr.length) {
+            renderBasket();
+            basketArr.forEach(el => totalPrice += parseInt(el.price.slice(0, -1)))
+            total.textContent = totalPrice > 0 ? 'Общая сумма ' + totalPrice + '$' : "";
+        }
+
     }
+
     function exitBasket() {
-      catalog.classList.add('catalogActive');
-      basket.classList.remove('basketActive');
-      let allCardsBasket = basketPar.querySelectorAll('.card');
-     setTimeout(() => {
-       allCardsBasket.forEach(el => 
-        el.remove());
-       totalPrice = 0;
-     }, 1000);
-  
+        catalog.classList.add('catalogActive');
+        basket.classList.remove('basketActive');
+        let allCardsBasket = basketPar.querySelectorAll('.card');
+        setTimeout(() => {
+            allCardsBasket.forEach(el =>
+                el.remove());
+            totalPrice = 0;
+        }, 1000);
+
     }
-    
-    function renderBasket(){
-      basketArr.forEach(el => createElem(el, basketPar));
+
+    function renderBasket() {
+        basketArr.forEach(el => createElem(el, basketPar));
     }
 }
 
 
-// clearcatalog => exit basket 
+// clearcatalog => exit basket

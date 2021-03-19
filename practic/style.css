@@ -66,9 +66,11 @@ button:active {
     transform: translateX(-100%);
     transition: transform 1s ease-in-out;
 }
-.red{
-  border: 2px solid red;
+
+.red {
+    border: 2px solid red;
 }
+
 .allInput p {
     color: white;
     font-size: 20px;
@@ -85,14 +87,16 @@ button:active {
     justify-content: center;
     align-items: center;
 }
+
 .basketPar,
 .par {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
-.basketPar .card button{
-  display: none;
+
+.basketPar .card button {
+    display: none;
 }
 
 .card {
@@ -162,12 +166,13 @@ button:active {
     color: #DDDDDD;
     font-size: 30px;
 }
-.headerCatalog span{
-      margin-left: 10px;
 
+.headerCatalog span {
+    margin-left: 10px;
 }
-#goToBasket{
-  font-size: 30px;
+
+#goToBasket {
+    font-size: 30px;
 }
 
 .basket {
@@ -181,19 +186,22 @@ button:active {
     transform: translateX(-100%);
     transition: transform 1s ease-in-out;
 }
+
 .total,
-.message{
+.message {
     color: #DDDDDD;
     text-align: center;
     font-size: 20px
 }
-.basketActive{
+
+.basketActive {
     transform: translateX(0)
 }
 
 #closeAddMenu {
     margin-left: 410px;
 }
+
 .closeBasket,
 #closeAddMenu,
 .closeCatalog {
@@ -204,6 +212,7 @@ button:active {
     border: none;
     transition: all .2s linear;
 }
+
 .closeBasket:active,
 #closeAddMenu:active,
 .closeCatalog:active {
