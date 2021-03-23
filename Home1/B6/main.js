@@ -1,4 +1,3 @@
-
 'use strict'
 
 function formatNumber(num, std) {
