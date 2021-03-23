@@ -2,11 +2,10 @@
 'use strict'
 
 function formatNumber(num, std) {
-  num = num.toFixed(std.substr(std.indexOf(".") + 1).length)
+  num = num.toFixed(std.substr(std.indexOf(".") + 1).length);
   let div = num.substr(num.indexOf("."))
   std = std.slice(0, std.indexOf('.')).split("").reverse();
-  let temp = String(parseInt(num));
-  temp = [...temp].reverse();
+  let temp = [...String(parseInt(num))].reverse();
   for (let i = 0; i < std.length; i++) {
     if (std[i] === " ") {
       temp.splice(i, 0, " ");
