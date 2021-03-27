@@ -4,7 +4,7 @@ const par = document.querySelector('#par');
 const img = document.querySelector('#img');
 let scale = 1;
 let deg = 0;
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 38:
             img.style.transform = `scale(${scale += .1})  rotate(${deg}deg)`;
