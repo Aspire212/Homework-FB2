@@ -1,9 +1,10 @@
 'use strict'
 const par = document.querySelector('#par');
-
 const img = document.querySelector('#img');
+
 let scale = 1;
 let deg = 0;
+
 document.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 38:
