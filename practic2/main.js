@@ -25,5 +25,4 @@ document.addEventListener('keydown', function(e) {
         //right
         img.style.transform = `scale(${scale}) rotate(${deg+= 1}deg)`;
     }
-
 })
