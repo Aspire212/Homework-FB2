@@ -12,5 +12,6 @@ body {
 
 img {
     display: block;
+    margin-top: 180px;
     transition: transform .3s linear;
 }
