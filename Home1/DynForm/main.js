@@ -100,7 +100,8 @@ function dynamicCreate(obj, par) {
     Object.keys(obj).forEach(key => {
       if (key === 'kind') {
         submit.type = obj[key];
-      } else {
+      }
+      else {
         submit.value = obj[key].slice(0, -1);
       }
     });
@@ -122,36 +123,22 @@ function dynamicCreate(obj, par) {
     /*Радио кнопки*/
     if (Object.values(obj).includes('radio')) {
       setRadio(newEl, obj, wrapF);
-    } else {
+    }
+    else {
       /*селект*/
       if (Object.values(obj).includes('combo')) {
         setSelect(newEl, obj, wrapF);
       }
     }
-  } else {
+  }
+  else {
     /*все остальное*/
-    Object.keys(obj).forEach(key => {
-      if (key === 'kind') {
-        if (obj[key] === 'longtext') {
-          newEl.type = "text";
-          newEl.style.width = '400px';
-        } else if (obj[key] === 'number') {
-          newEl.type = 'number';
-          newEl.style.width = '50px';
-        } else if (obj[key] === 'check') {
-          newEl.type = 'checkbox';
-        }
-      } else {
-        newEl = newEl;
-      }
-      newEl[key] = obj[key];
-    })
-    wrapF.append(newEl);
-    /*Размеры текстареи*/
-    if (newEl.classList.contains('area')) {
-      newEl.style.width = '100%';
-      newEl.parentElement.style.width = "100%";
-    }
+    setAll(newEl, obj, wrapF)
+  }
+  /*Размеры текстареи*/
+  if (newEl.classList.contains('area')) {
+    newEl.style.width = '100%';
+    newEl.parentElement.style.width = "100%";
   }
   par.append(newLabel);
 }
@@ -179,21 +166,48 @@ function formElement(obj, el = null) {
 function create(el) {
   return document.createElement(el);
 }
-
-function setRadio(inp, hash, parent){
+/*простые*/
+function setAll(inp, hash, parent) {
+  Object.keys(hash).forEach(key => {
+    if (key === 'kind') {
+      if (hash[key] === 'longtext') {
+        inp.type = "text";
+        inp.style.width = '400px';
+      }
+      else if (hash[key] === 'number') {
+        inp.type = 'number';
+        inp.style.width = '50px';
+      }
+      else if (hash[key] === 'check') {
+        inp.type = 'checkbox';
+      }
+    }
+    else {
+      inp = inp;
+    }
+    inp[key] = hash[key];
+  })
+  parent.append(inp);
+  return parent;
+}
+/*радио кнопки*/
+function setRadio(inp, hash, parent) {
   Object.keys(hash).forEach(key => {
     if (key === 'kind') {
       inp.type = hash[key];
-    } else if (key === 'name') {
+    }
+    else if (key === 'name') {
       inp[key] = hash[key];
-    } else {
+    }
+    else {
       hash[key].forEach(childObj => {
         let span = create('span');
         Object.keys(childObj).forEach(key => {
           if (key === 'value') {
             inp[key] = childObj[key];
             span.prepend(inp.cloneNode(false));
-          } else {
+          }
+          else {
             span.append(childObj[key]);
           }
           parent.append(span);
@@ -203,10 +217,8 @@ function setRadio(inp, hash, parent){
   });
   return parent;
 }
-
 /*Рендер чилдов селекта*/
-
-function setSelect(sel, hash, parent){
+function setSelect(sel, hash, parent) {
   Object.keys(hash).forEach(key => {
     if (key === 'name') {
       sel[key] = hash[key];
@@ -218,7 +230,8 @@ function setSelect(sel, hash, parent){
         Object.keys(childObj).forEach(key => {
           if (key === 'value') {
             option[key] = childObj[key]
-          } else {
+          }
+          else {
             option.textContent = childObj[key];
           }
         })
