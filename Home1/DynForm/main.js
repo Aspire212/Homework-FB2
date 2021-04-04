@@ -75,6 +75,8 @@ const formDef2 = [{
   label: 'Зарегистрироваться:',
   kind: 'submit'
 }, ];
+
+
 const app = document.querySelector('#app');
 const formTag = "<form>";
 dynForm(formDef1, formTag, app);
@@ -202,6 +204,7 @@ function setRadio(inp, hash, parent) {
     else {
       hash[key].forEach(childObj => {
         let span = create('span');
+        span.style.marginRight = '15px';
         Object.keys(childObj).forEach(key => {
           if (key === 'value') {
             inp[key] = childObj[key];
