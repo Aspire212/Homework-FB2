@@ -55,7 +55,7 @@ const formDef1 = [{
   label: 'Опубликовать:',
   kind: 'submit'
 }, ];
-var formDef2 = [{
+const formDef2 = [{
   label: 'Фамилия:',
   kind: 'longtext',
   name: 'lastname'
@@ -134,7 +134,7 @@ function dynamicCreate(obj, par) {
                 newEl[key] = childObj[key];
                 span.prepend(newEl.cloneNode(false));
               } else {
-                span.append(childObj[key])
+                span.append(childObj[key]);
               }
               wrapF.append(span);
             });
