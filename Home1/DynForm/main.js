@@ -185,6 +185,7 @@ function dynamicCreate(obj, par) {
       newEl[key] = obj[key];
     })
     wrapF.append(newEl);
+    /*Размеры текстареи*/
     if (newEl.classList.contains('area')) {
       newEl.style.width = '100%';
       newEl.parentElement.style.width = "100%";
