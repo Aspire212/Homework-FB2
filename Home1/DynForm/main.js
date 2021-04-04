@@ -102,8 +102,7 @@ function dynamicCreate(obj, par) {
     Object.keys(obj).forEach(key => {
       if (key === 'kind') {
         submit.type = obj[key];
-      }
-      else {
+      } else {
         submit.value = obj[key].slice(0, -1);
       }
     });
@@ -125,15 +124,13 @@ function dynamicCreate(obj, par) {
     /*Радио кнопки*/
     if (Object.values(obj).includes('radio')) {
       setRadio(newEl, obj, wrapF);
-    }
-    else {
+    } else {
       /*селект*/
       if (Object.values(obj).includes('combo')) {
         setSelect(newEl, obj, wrapF);
       }
     }
-  }
-  else {
+  } else {
     /*все остальное*/
     setAll(newEl, obj, wrapF)
   }
@@ -183,8 +180,7 @@ function setAll(inp, hash, parent) {
       else if (hash[key] === 'check') {
         inp.type = 'checkbox';
       }
-    }
-    else {
+    } else {
       inp = inp;
     }
     inp[key] = hash[key];
@@ -200,8 +196,7 @@ function setRadio(inp, hash, parent) {
     }
     else if (key === 'name') {
       inp[key] = hash[key];
-    }
-    else {
+    } else {
       hash[key].forEach(childObj => {
         let span = create('span');
         span.style.marginRight = '15px';
@@ -209,8 +204,7 @@ function setRadio(inp, hash, parent) {
           if (key === 'value') {
             inp[key] = childObj[key];
             span.prepend(inp.cloneNode(false));
-          }
-          else {
+          } else {
             span.append(childObj[key]);
           }
           parent.append(span);
@@ -233,8 +227,7 @@ function setSelect(sel, hash, parent) {
         Object.keys(childObj).forEach(key => {
           if (key === 'value') {
             option[key] = childObj[key]
-          }
-          else {
+          } else {
             option.textContent = childObj[key];
           }
         });
