@@ -121,49 +121,11 @@ function dynamicCreate(obj, par) {
   if (obj.hasOwnProperty('variants')) {
     /*Радио кнопки*/
     if (Object.values(obj).includes('radio')) {
-      Object.keys(obj).forEach(key => {
-        if (key === 'kind') {
-          newEl.type = obj[key]
-        } else if (key === 'name') {
-          newEl[key] = obj[key];
-        } else {
-          obj[key].forEach(childObj => {
-            let span = create('span');
-            Object.keys(childObj).forEach(key => {
-              if (key === 'value') {
-                newEl[key] = childObj[key];
-                span.prepend(newEl.cloneNode(false));
-              } else {
-                span.append(childObj[key]);
-              }
-              wrapF.append(span);
-            });
-          });
-        }
-      });
+      setRadio(newEl, obj, wrapF);
     } else {
       /*селект*/
       if (Object.values(obj).includes('combo')) {
-        Object.keys(obj).forEach(key => {
-          if (key === 'name') {
-            newEl[key] = obj[key];
-          }
-          if (Array.isArray(obj[key])) {
-            Object.keys(obj[key]).forEach(arr => {
-              let option = create('option');
-              let childObj = obj[key][arr]
-              Object.keys(childObj).forEach(key => {
-                if (key === 'value') {
-                  option[key] = childObj[key]
-                } else {
-                  option.textContent = childObj[key];
-                }
-              })
-              newEl.append(option.cloneNode(true));
-            })
-            wrapF.append(newEl);
-          }
-        })
+        setSelect(newEl, obj, wrapF);
       }
     }
   } else {
@@ -216,4 +178,54 @@ function formElement(obj, el = null) {
 
 function create(el) {
   return document.createElement(el);
+}
+
+function setRadio(inp, hash, parent){
+  Object.keys(hash).forEach(key => {
+    if (key === 'kind') {
+      inp.type = hash[key];
+    } else if (key === 'name') {
+      inp[key] = hash[key];
+    } else {
+      hash[key].forEach(childObj => {
+        let span = create('span');
+        Object.keys(childObj).forEach(key => {
+          if (key === 'value') {
+            inp[key] = childObj[key];
+            span.prepend(inp.cloneNode(false));
+          } else {
+            span.append(childObj[key]);
+          }
+          parent.append(span);
+        });
+      });
+    }
+  });
+  return parent;
+}
+
+/*Рендер чилдов селекта*/
+
+function setSelect(sel, hash, parent){
+  Object.keys(hash).forEach(key => {
+    if (key === 'name') {
+      sel[key] = hash[key];
+    }
+    if (Array.isArray(hash[key])) {
+      Object.keys(hash[key]).forEach(arr => {
+        let option = create('option');
+        let childObj = hash[key][arr]
+        Object.keys(childObj).forEach(key => {
+          if (key === 'value') {
+            option[key] = childObj[key]
+          } else {
+            option.textContent = childObj[key];
+          }
+        })
+        sel.append(option.cloneNode(true));
+      })
+      parent.append(sel);
+    }
+  });
+  return parent;
 }
