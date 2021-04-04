@@ -186,7 +186,7 @@ function setAll(inp, hash, parent) {
       inp = inp;
     }
     inp[key] = hash[key];
-  })
+  });
   parent.append(inp);
   return parent;
 }
@@ -234,9 +234,9 @@ function setSelect(sel, hash, parent) {
           else {
             option.textContent = childObj[key];
           }
-        })
+        });
         sel.append(option.cloneNode(true));
-      })
+      });
       parent.append(sel);
     }
   });
