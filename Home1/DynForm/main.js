@@ -84,7 +84,7 @@ function dynForm(arr, tag, par) {
   let formPar = document.createElement(tag.slice(1, -1));
   formPar.action = "https://fe.it-academy.by/TestForm.php";
   formPar.method = "post";
-  formPar.style.cssText = "border-bottom: 1px solid black; padding: 0 0 10px 0; margin: 10px auto";
+  formPar.style.cssText = "border-bottom: 1px solid black; padding: 0 0 10px 0; margin: 20px auto";
   arr.forEach(obj => {
     dynamicCreate(obj, formPar)
   });
