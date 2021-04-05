@@ -218,7 +218,7 @@ function setRadio(inp, hash, parent) {
   });
   return parent;
 }
-/*опции седекта*/
+/*опции селекта*/
 function setSelect(sel, hash, parent) {
   Object.keys(hash).forEach(key => {
     if (key === 'name') {
