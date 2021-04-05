@@ -218,7 +218,7 @@ function setRadio(inp, hash, parent) {
   });
   return parent;
 }
-/*Рендер чилдов селекта*/
+/*опции седекта*/
 function setSelect(sel, hash, parent) {
   Object.keys(hash).forEach(key => {
     if (key === 'name') {
@@ -227,10 +227,10 @@ function setSelect(sel, hash, parent) {
     if (Array.isArray(hash[key])) {
       Object.keys(hash[key]).forEach(arr => {
         let option = create('option');
-        let childObj = hash[key][arr]
+        let childObj = hash[key][arr];
         Object.keys(childObj).forEach(key => {
           if (key === 'value') {
-            option[key] = childObj[key]
+            option[key] = childObj[key];
           }
           else {
             option.textContent = childObj[key];
