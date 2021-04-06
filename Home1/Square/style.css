@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.readme {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+h2 {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+ol {
+    font-size: 20px;
+}
+
+.field {
+    width: 80%;
+    height: 600px;
+    margin: 20px auto;
+    background: #44B2B4;
+    position: relative;
+}
+
+.square {
+    width: 80px;
+    height: 80px;
+    background: #4b24a7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: border .3s ease-in-out;
+    text-align: center;
+}
