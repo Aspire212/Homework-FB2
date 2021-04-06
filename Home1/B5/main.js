@@ -5,9 +5,9 @@ function buildWrapper(tag) {
     text = [...text].map(el => el === '<' ? el = '&lt;' : el === '>' ? el = '&gt;' : el === '"' ? el = '&Prime;' : el === "'" ? el = '&prime;' : el === '&' ? el = '&amp;' : el).join("");
     if (atr) {
       Object.keys(atr).forEach(key => strAtr += `${key}="${atr[key]}" `);
-      return `<${tag} ${strAtr}>${text}</${tag}`;
+      return `<${tag} ${strAtr}>${text}</${tag}>`;
     }
-    return `<${tag}>${text}</${tag}`;
+    return `<${tag}>${text}</${tag}>`;
   }
 }
 var wrapH1 = buildWrapper("H1");
