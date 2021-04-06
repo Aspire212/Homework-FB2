@@ -22,7 +22,6 @@ const game = {
 
 window.addEventListener('keyup', function(e) {
     let btn = e.keyCode;
-    console.log(btn, game.start)
     if (btn === game.start) {
         if (game.timer) {
             game.x = 0;
@@ -57,7 +56,6 @@ function move(id) {
         case game.start:
             square.style.left = `${game.x++}px`;
             if (game.x >= game.fW - game.sW) {
-                console.log(game.x);
                 game.play = false;
                 clearInterval(game.timer)
             }
@@ -65,7 +63,6 @@ function move(id) {
         case game.up:
             square.style.top = `${game.y--}px`;
             if (game.y <= 0) {
-                console.log(game.y)
                 game.play = false;
                 clearInterval(game.timer);
             }
@@ -73,7 +70,6 @@ function move(id) {
         case game.right:
             square.style.left = `${game.x++}px`;
             if (game.x >= game.fW - game.sW) {
-                console.log(game.x);
                 game.play = false;
                 clearInterval(game.timer);
             }
@@ -81,7 +77,6 @@ function move(id) {
         case game.low:
             square.style.top = `${game.y++}px`;
             if (game.y >= game.fH - game.sH) {
-                console.log(game.y);
                 game.play = false;
                 clearInterval(game.timer);
             }
