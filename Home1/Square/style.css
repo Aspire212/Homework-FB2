@@ -40,4 +40,5 @@ ol {
     left: 0;
     transition: border .3s ease-in-out;
     text-align: center;
+    color: azure;
 }
