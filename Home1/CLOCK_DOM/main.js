@@ -24,8 +24,8 @@ function builder(parent) {
         field.append(chield);
     }
     field.childNodes.forEach((el, i) => {
-        clock.posDot = (i + 1) * clock.deg / clock.hourDots
-        clock.angle = clock.radian(clock.posDot) - clock.radian(clock.hourPos)
+        clock.posDot = (i + 1) * clock.deg / clock.hourDots;
+        clock.angle = clock.radian(clock.posDot) - clock.radian(clock.hourPos);
         clock.x = clock.radius * Math.cos(clock.angle);
         clock.y = clock.radius * Math.sin(clock.angle);
         el.textContent = i + 1;
@@ -39,7 +39,7 @@ function builder(parent) {
     secondsArrow.style.cssText = 'position: absolute; top: 10px; left: 199px; width: 2px; height: 190px; background: yellow; transform-origin: 50% 100% ;';
     minutesArrow.style.cssText = 'position: absolute; top: 50px; left: 198px; width: 4px; height: 150px; background: yellow; transform-origin: 50% 100% ;';
     hoursArrow.style.cssText = 'position: absolute; top: 70px; left: 197px; width: 6px; height: 130px; background: yellow; transform-origin: 50% 100% ;';
-    time.style.cssText = 'position: absolute; top: 100px; left: 100px; width: 200px; height: 60px; text-align: center; line-height: 60px; font-size: 20px;'
+    time.style.cssText = 'position: absolute; top: 100px; left: 100px; width: 200px; height: 60px; text-align: center; line-height: 60px; font-size: 20px;';
     secondsArrow.classList.add('seconds');
     minutesArrow.classList.add('minutes');
     hoursArrow.classList.add('hours');
@@ -50,7 +50,7 @@ function builder(parent) {
     field.append(time);
     time.textContent = curientTime(hoursArrow, minutesArrow, secondsArrow);
     setInterval(() => time.textContent = curientTime(hoursArrow, minutesArrow, secondsArrow), 1000);
-    parent.append(field);
+    return parent.append(field);
 }
 
 function curientTime(hourArr, minArr, secArr) {
