@@ -74,8 +74,6 @@ function zerosTime(val) {
     return val;
 }
 /*
-  clockFild - часы
-  timeDots - точки часы
   radius - 40% родителя,
   hourDots - 12 часовы точек,
   deg - 360 круг в градусах,
