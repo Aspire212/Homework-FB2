@@ -40,10 +40,6 @@ function builder(parent) {
     minutesArrow.style.cssText = 'position: absolute; top: 50px; left: 198px; width: 4px; height: 150px; background: yellow; transform-origin: 50% 100% ;';
     hoursArrow.style.cssText = 'position: absolute; top: 70px; left: 197px; width: 6px; height: 130px; background: yellow; transform-origin: 50% 100% ;';
     time.style.cssText = 'position: absolute; top: 100px; left: 100px; width: 200px; height: 60px; text-align: center; line-height: 60px; font-size: 20px;';
-    secondsArrow.classList.add('seconds');
-    minutesArrow.classList.add('minutes');
-    hoursArrow.classList.add('hours');
-    time.classList.add('numberTime');
     field.append(secondsArrow);
     field.append(minutesArrow);
     field.append(hoursArrow);
