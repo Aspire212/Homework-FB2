@@ -57,7 +57,7 @@ function move(id) {
             square.style.left = `${game.x++}px`;
             if (game.x >= game.fW - game.sW) {
                 game.play = false;
-                clearInterval(game.timer)
+                clearInterval(game.timer);
             }
             break;
         case game.up:
