@@ -51,7 +51,7 @@ function builder(parent) {
 
 function curientTime(hourArw, minArw, secArw) {
     const data = new Date();
-    const time = {
+    const timeAngle = {
         sec: data.getSeconds(),
         min: data.getMinutes(),
         hour: data.getHours(),
@@ -60,13 +60,13 @@ function curientTime(hourArw, minArw, secArw) {
         hourDeg: null,
         zerosTime: (val) => val < 10 ? '0' + val : val,
     }
-    time.secDeg = 360 / 60 * time.sec;
-    time.minDeg = 360 / 60 * time.min + 6 / 60 * time.sec;
-    time.hourDeg = 360 / 12 * time.hour + 30 / 60 * time.min + 0.5 / 60 * time.sec;
-    secArw.style.transform = `rotateZ(${time.secDeg}deg)`;
-    minArw.style.transform = `rotateZ(${time.minDeg}deg)`;
-    hourArw.style.transform = `rotateZ(${time.hourDeg}deg)`;
-    return `${time.zerosTime(time.hour)}:${time.zerosTime(time.min)}:${time.zerosTime(time.sec)}`;
+    timeAngle.secDeg = 360 / 60 * timeAngle.sec;
+    timeAngle.minDeg = 360 / 60 * timeAngle.min + 6 / 60 * timeAngle.sec;
+    timeAngle.hourDeg = 360 / 12 * timeAngle.hour + 30 / 60 * timeAngle.min + 0.5 / 60 * timeAngle.sec;
+    secArw.style.transform = `rotateZ(${timeAngle.secDeg}deg)`;
+    minArw.style.transform = `rotateZ(${timeAngle.minDeg}deg)`;
+    hourArw.style.transform = `rotateZ(${timeAngle.hourDeg}deg)`;
+    return `${timeAngle.zerosTime(timeAngle.hour)}:${timeAngle.zerosTime(timeAngle.min)}:${timeAngle.zerosTime(timeAngle.sec)}`;
 }
 /*
   radius - 40% родителя,
