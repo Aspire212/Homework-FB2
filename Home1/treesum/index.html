@@ -10,13 +10,13 @@
 <body>
 <script>
   'use strict'
-  const treesum = arr => arr.flat(Infinity).reduce((sum, el) => sum + parseFloat(el), 0);
+   const treesum = arr => arr.flat(Infinity).reduce((sum, el) => sum + parseFloat(el), 0);
  
-  /*решение при помощи рекурсии*/
-  let count = 0;
-  function treesumTwo(arr){
+   /*решение при помощи рекурсии*/
+   let count = 0;
+   function treesumTwo(arr) {
     for (let elem of arr) {
-      if(typeof elem === 'number'){
+        if(typeof elem === 'number'){
         count += elem;
       }
       else{
