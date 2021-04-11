@@ -40,6 +40,7 @@ function builder(parent) {
     minutesArrow.style.cssText = 'position: absolute; top: 50px; left: 198px; width: 4px; height: 150px; background: yellow; transform-origin: 50% 100% ;';
     hoursArrow.style.cssText = 'position: absolute; top: 70px; left: 197px; width: 6px; height: 130px; background: yellow; transform-origin: 50% 100% ;';
     time.style.cssText = 'position: absolute; top: 100px; left: 100px; width: 200px; height: 60px; text-align: center; line-height: 60px; font-size: 20px;';
+    
     field.append(secondsArrow);
     field.append(minutesArrow);
     field.append(hoursArrow);
@@ -49,7 +50,7 @@ function builder(parent) {
     return parent.append(field);
 }
 
-function curientTime(hourArr, minArr, secArr) {
+function curientTime(hourArw, minArw, secArw) {
     const data = new Date();
     const sec = data.getSeconds();
     const min = data.getMinutes();
@@ -57,9 +58,9 @@ function curientTime(hourArr, minArr, secArr) {
     let secDeg = 360 / 60 * sec;
     let minDeg = 360 / 60 * min + 6 / 60 * sec;
     let hourDeg = 360 / 12 * hour + 30 / 60 * min + 0.5 / 60 * sec;
-    secArr.style.transform = `rotateZ(${secDeg}deg)`;
-    minArr.style.transform = `rotateZ(${minDeg}deg)`;
-    hourArr.style.transform = `rotateZ(${hourDeg}deg)`;
+    secArw.style.transform = `rotateZ(${secDeg}deg)`;
+    minArw.style.transform = `rotateZ(${minDeg}deg)`;
+    hourArw.style.transform = `rotateZ(${hourDeg}deg)`;
     return `${zerosTime(hour)}:${zerosTime(min)}:${zerosTime(sec)}`;
 }
 
