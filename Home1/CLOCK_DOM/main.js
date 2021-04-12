@@ -51,7 +51,13 @@ function builder(parent) {
 
 function curientTime(hourArw, minArw, secArw) {
     const data = new Date();
-    const timeAngle = {
+    const time = {
+        deg: 360,
+        pm: 12,
+        angleHour: 30,
+        angleMin: 0.5,
+        minSec: 60,
+        xVar: 6,
         sec: data.getSeconds(),
         min: data.getMinutes(),
         hour: data.getHours(),
@@ -60,24 +66,11 @@ function curientTime(hourArw, minArw, secArw) {
         hourDeg: null,
         zerosTime: (val) => val < 10 ? '0' + val : val,
     }
-    timeAngle.secDeg = 360 / 60 * timeAngle.sec;
-    timeAngle.minDeg = 360 / 60 * timeAngle.min + 6 / 60 * timeAngle.sec;
-    timeAngle.hourDeg = 360 / 12 * timeAngle.hour + 30 / 60 * timeAngle.min + 0.5 / 60 * timeAngle.sec;
-    secArw.style.transform = `rotateZ(${timeAngle.secDeg}deg)`;
-    minArw.style.transform = `rotateZ(${timeAngle.minDeg}deg)`;
-    hourArw.style.transform = `rotateZ(${timeAngle.hourDeg}deg)`;
-    return `${timeAngle.zerosTime(timeAngle.hour)}:${timeAngle.zerosTime(timeAngle.min)}:${timeAngle.zerosTime(timeAngle.sec)}`;
+    time.secDeg = time.deg / time.minSec * time.sec;
+    time.minDeg = time.deg / time.minSec * time.min + time.xVar / time.minSec * time.sec;
+    time.hourDeg = time.deg / time.pm * time.hour + time.angleHour / time.minSec * time.min + time.angleMin / time.minSec * time.sec;
+    secArw.style.transform = `rotateZ(${time.secDeg}deg)`;
+    minArw.style.transform = `rotateZ(${time.minDeg}deg)`;
+    hourArw.style.transform = `rotateZ(${time.hourDeg}deg)`;
+    return `${time.zerosTime(time.hour)}:${time.zerosTime(time.min)}:${time.zerosTime(time.sec)}`;
 }
-/*
-  radius - 40% родителя,
-  hourDots - 12 часовы точек,
-  deg - 360 круг в градусах,
-  hourPos - 90 для начала круга с 12 часоав,
-  translate - 50 смещение элемента на 50%
-  от своей оси
-  angle - угол вычисляющийся в цикле,
-  posDot позиция элемента в градусах
-  x - будущее значение left
-  y- будущее значение top
-  radian - перевод градусов  в радианы
-*/
