@@ -58,12 +58,12 @@ function curientTime(hourArw, minArw, secArw) {
         angleMin: 0.5,
         minSec: 60,
         xVar: 6,
-        sec: data.getSeconds(),
-        min: data.getMinutes(),
-        hour: data.getHours(),
         secDeg: null,
         minDeg: null,
         hourDeg: null,
+        sec: data.getSeconds(),
+        hour: data.getHours(),
+        min: data.getMinutes(),
         zerosTime: (val) => val < 10 ? '0' + val : val,
     }
     time.secDeg = time.deg / time.minSec * time.sec;
