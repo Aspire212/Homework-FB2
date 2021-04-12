@@ -18,7 +18,7 @@ function builder(parent) {
         radian: (deg) => (Math.PI / 180) * deg,
     }
     for (let i = 0; i < clock.hourDots; i++) {
-        let chield = document.createElement('div');
+        const chield = document.createElement('div');
         chield.textContent = i + 1;
         chield.style.cssText = 'width: 35px; height: 35px; border-radius: 50% ; background: #C7C7C1; position: absolute; top: 50%; left: 50%;transform: translate(-50%, -50%); text-align: center;bline-height: 35px; font-size: 25px;';
         field.append(chield);
