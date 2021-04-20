@@ -40,10 +40,10 @@ function moveClock() {
         zerosTime: (val) => val < 10 ? '0' + val : val,
         radian: (deg) => (Math.PI / 180) * deg,
     };
-
-    clock.secAngle = clock.deg * (data.getSeconds() / clock.minSec) + clock.center - clock.hourPos;
-    clock.minAngle = clock.deg * (data.getMinutes() / clock.minSec) + (data.getSeconds() / clock.minSec) * (clock.minSec / 10) - clock.hourPos;
-    clock.hourAngle = clock.deg * (data.getHours() / clock.hourDots) + (data.getMinutes() / clock.minSec) * (clock.minSec / 2) - clock.hourPos;
+   
+   clock.secAngle = clock.deg * (clock.sec / clock.minSec) - clock.hourPos;
+    clock.minAngle = clock.deg * (clock.min / clock.minSec) + (clock.sec / clock.minSec) * (clock.minSec / 10) - clock.hourPos;
+    clock.hourAngle = clock.deg * (clock.hour / clock.hourDots) + (clock.min / clock.minSec) * (clock.minSec / 2) - clock.hourPos;
     ctx.beginPath();
     ctx.arc(clock.center, clock.center, clock.radius, 0, clock.circle);
     ctx.fillStyle = 'purple';
