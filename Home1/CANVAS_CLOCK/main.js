@@ -40,7 +40,7 @@ function moveClock() {
         zerosTime: (val) => val < 10 ? '0' + val : val,
         radian: (deg) => (Math.PI / 180) * deg,
     };
-   
+
     clock.secAngle = clock.deg * (clock.sec / clock.minSec) - clock.hourPos;
     clock.minAngle = clock.deg * (clock.min / clock.minSec) + (clock.sec / clock.minSec) * (clock.minSec / 10) - clock.hourPos;
     clock.hourAngle = clock.deg * (clock.hour / clock.hourDots) + (clock.min / clock.minSec) * (clock.minSec / 2) - clock.hourPos;
