@@ -42,13 +42,15 @@ function moveClock() {
         zerosTime: (val) => val < 10 ? '0' + val : val,
         radian: (deg) => (Math.PI / 180) * deg,
     };
+
     clock.secAngle = clock.deg * (data.getSeconds() / clock.minSec) + clock.center - clock.hourPos;
-    clock.minAngle = clock.deg * (data.getMinutes() / clock.minSec) + (data.getSeconds() / clock.minSec) * (clock.minSec / 10) - clock.hourPos,
-        clock.hourAngle = clock.deg * (data.getHours() / clock.hourDots) + (data.getMinutes() / clock.minSec) * (clock.minSec / 2) - clock.hourPos,
-        ctx.beginPath();
+    clock.minAngle = clock.deg * (data.getMinutes() / clock.minSec) + (data.getSeconds() / clock.minSec) * (clock.minSec / 10) - clock.hourPos;
+    clock.hourAngle = clock.deg * (data.getHours() / clock.hourDots) + (data.getMinutes() / clock.minSec) * (clock.minSec / 2) - clock.hourPos;
+    ctx.beginPath();
     ctx.arc(clock.center, clock.center, clock.radius, 0, clock.circle);
     ctx.fillStyle = 'purple';
     ctx.fill();
+
     for (let i = 0; i < clock.hourDots; i++) {
         clock.posDot = (i + 1) * clock.deg / clock.hourDots;
         clock.angle = clock.radian(clock.posDot) - clock.radian(clock.hourPos);
@@ -63,6 +65,7 @@ function moveClock() {
         ctx.fillText(i + 1, clock.x - clock.hourText, clock.y + clock.hourText);
         ctx.closePath();
     }
+
     paintArw(clock.minAngle, clock.minArwLen, 'orange', clock.minArwWidth);
     paintArw(clock.hourAngle, clock.hourArwLen, 'orange', clock.hourArwWidt);
     paintArw(clock.secAngle, clock.secArwLen, 'red', clock.secArwWidth);
