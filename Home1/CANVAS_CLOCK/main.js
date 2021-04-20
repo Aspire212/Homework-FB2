@@ -1,0 +1,87 @@
+'use strict';
+moveClock();
+setInterval(() => {
+    moveClock();
+}, 1000);
+
+function moveClock() {
+    const cvs = document.querySelector('#cvs');
+    const ctx = cvs.getContext('2d');
+    const data = new Date();
+    const clock = {
+        radius: 200,
+        hourDots: 12,
+        minSec: 60,
+        deg: 360,
+        hourPos: 90,
+        hourText: 10,
+        translate: 40,
+        angle: null,
+        posDot: null,
+        center: 200,
+        hourSize: 35,
+        cDot: 20,
+        x: null,
+        y: null,
+        timePos: 150,
+        moveX: null,
+        moveY: null,
+        secArwWidth: 2,
+        secArwLen: 160,
+        minArwWidth: 6,
+        minArwLen: 120,
+        hourArwWidt: 8,
+        hourArwLen: 90,
+        secAngle: 0,
+        minAngle: 0,
+        hourAngle: 0,
+        sec: data.getSeconds(),
+        min: data.getMinutes(),
+        hour: data.getHours(),
+        circle: 2 * Math.PI,
+        zerosTime: (val) => val < 10 ? '0' + val : val,
+        radian: (deg) => (Math.PI / 180) * deg,
+    };
+    clock.secAngle = clock.deg * (data.getSeconds() / clock.minSec) + clock.center - clock.hourPos;
+    clock.minAngle = clock.deg * (data.getMinutes() / clock.minSec) + (data.getSeconds() / clock.minSec) * (clock.minSec / 10) - clock.hourPos,
+        clock.hourAngle = clock.deg * (data.getHours() / clock.hourDots) + (data.getMinutes() / clock.minSec) * (clock.minSec / 2) - clock.hourPos,
+        ctx.beginPath();
+    ctx.arc(clock.center, clock.center, clock.radius, 0, clock.circle);
+    ctx.fillStyle = 'purple';
+    ctx.fill();
+    for (let i = 0; i < clock.hourDots; i++) {
+        clock.posDot = (i + 1) * clock.deg / clock.hourDots;
+        clock.angle = clock.radian(clock.posDot) - clock.radian(clock.hourPos);
+        clock.x = clock.center + (clock.radius - clock.translate) * Math.cos(clock.angle);
+        clock.y = clock.center + (clock.radius - clock.translate) * Math.sin(clock.angle);
+        ctx.beginPath();
+        ctx.arc(clock.x, clock.y, clock.hourSize, 0, clock.circle);
+        ctx.fillStyle = 'green';
+        ctx.fill();
+        ctx.font = "25px Sans-erif";
+        ctx.fillStyle = 'white';
+        ctx.fillText(i + 1, clock.x - clock.hourText, clock.y + clock.hourText);
+        ctx.closePath();
+    }
+    paintArw(clock.minAngle, clock.minArwLen, 'orange', clock.minArwWidth);
+    paintArw(clock.hourAngle, clock.hourArwLen, 'orange', clock.hourArwWidt);
+    paintArw(clock.secAngle, clock.secArwLen, 'red', clock.secArwWidth);
+    ctx.fillStyle = 'orange';
+    ctx.arc(clock.center, clock.center, clock.cDot, 0, clock.circle);
+    ctx.fill();
+    ctx.closePath();
+    ctx.fillStyle = 'white';
+    ctx.fillText(`${clock.zerosTime(clock.hour)}:${clock.zerosTime(clock.min)}:${clock.zerosTime(clock.sec)}`, clock.timePos, clock.timePos);
+
+    function paintArw(deg, len, color, width) {
+        clock.moveX = clock.center + Math.cos(clock.radian(deg)) * len;
+        clock.moveY = clock.center + Math.sin(clock.radian(deg)) * len;
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.moveTo(clock.center, clock.center);
+        ctx.lineTo(clock.moveX, clock.moveY);
+        ctx.stroke();
+        ctx.closePath();
+    }
+}
