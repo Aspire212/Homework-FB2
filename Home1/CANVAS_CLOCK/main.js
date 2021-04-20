@@ -24,8 +24,6 @@ function moveClock() {
         x: null,
         y: null,
         timePos: 150,
-        moveX: null,
-        moveY: null,
         secArwWidth: 2,
         secArwLen: 160,
         minArwWidth: 6,
@@ -77,13 +75,13 @@ function moveClock() {
     ctx.fillText(`${clock.zerosTime(clock.hour)}:${clock.zerosTime(clock.min)}:${clock.zerosTime(clock.sec)}`, clock.timePos, clock.timePos);
 
     function paintArw(deg, len, color, width) {
-        clock.moveX = clock.center + Math.cos(clock.radian(deg)) * len;
-        clock.moveY = clock.center + Math.sin(clock.radian(deg)) * len;
+        clock.x = clock.center + Math.cos(clock.radian(deg)) * len;
+        clock.y = clock.center + Math.sin(clock.radian(deg)) * len;
         ctx.beginPath();
         ctx.strokeStyle = color;
         ctx.lineWidth = width;
         ctx.moveTo(clock.center, clock.center);
-        ctx.lineTo(clock.moveX, clock.moveY);
+        ctx.lineTo(clock.x, clock.y);
         ctx.stroke();
         ctx.closePath();
     }
