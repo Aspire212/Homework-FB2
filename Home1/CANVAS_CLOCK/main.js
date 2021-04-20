@@ -28,7 +28,7 @@ function moveClock() {
         secArwLen: 160,
         minArwWidth: 6,
         minArwLen: 120,
-        hourArwWidt: 8,
+        hourArwWidth: 8,
         hourArwLen: 90,
         secAngle: 0,
         minAngle: 0,
@@ -60,12 +60,12 @@ function moveClock() {
         ctx.fill();
         ctx.font = "25px Sans-serif";
         ctx.fillStyle = 'white';
-        ctx.fillText(i + 1, clock.x - clock.hourText, clock.y + clock.hourText);
+        ctx.fillText(`${i + 1}`, clock.x - clock.hourText, clock.y + clock.hourText);
         ctx.closePath();
     }
 
     paintArw(clock.minAngle, clock.minArwLen, 'orange', clock.minArwWidth);
-    paintArw(clock.hourAngle, clock.hourArwLen, 'orange', clock.hourArwWidt);
+    paintArw(clock.hourAngle, clock.hourArwLen, 'orange', clock.hourArwWidth);
     paintArw(clock.secAngle, clock.secArwLen, 'red', clock.secArwWidth);
     ctx.fillStyle = 'orange';
     ctx.arc(clock.center, clock.center, clock.cDot, 0, clock.circle);
