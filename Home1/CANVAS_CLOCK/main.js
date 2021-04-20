@@ -58,7 +58,7 @@ function moveClock() {
         ctx.arc(clock.x, clock.y, clock.hourSize, 0, clock.circle);
         ctx.fillStyle = 'green';
         ctx.fill();
-        ctx.font = "25px Sans-erif";
+        ctx.font = "25px Sans-serif";
         ctx.fillStyle = 'white';
         ctx.fillText(i + 1, clock.x - clock.hourText, clock.y + clock.hourText);
         ctx.closePath();
