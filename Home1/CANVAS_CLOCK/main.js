@@ -1,8 +1,10 @@
 'use strict';
-moveClock();
-setInterval(() => {
+window.addEventListener('DOMContentLoaded', () =>{
+    moveClock();
+    setInterval(() => {
     moveClock();
 }, 1000);
+});
 
 function moveClock() {
     const cvs = document.querySelector('#cvs');
