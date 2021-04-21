@@ -9,6 +9,14 @@ function moveClock() {
     const ctx = cvs.getContext('2d');
     const data = new Date();
     const clock = {
+        color: {
+            field: 'purple',
+            arw: 'orange',
+            secArw: 'red',
+            hour: 'green',
+            text: 'white'
+        },
+        font: '25px Sans-serif',
         radius: 200,
         hourDots: 12,
         minSec: 60,
@@ -46,7 +54,7 @@ function moveClock() {
     clock.hourAngle = clock.deg * (clock.hour / clock.hourDots) + (clock.min / clock.minSec) * (clock.minSec / 2) - clock.hourPos;
     ctx.beginPath();
     ctx.arc(clock.center, clock.center, clock.radius, 0, clock.circle);
-    ctx.fillStyle = 'purple';
+    ctx.fillStyle = clock.color.field;
     ctx.fill();
 
     for (let i = 0; i < clock.hourDots; i++) {
@@ -56,22 +64,22 @@ function moveClock() {
         clock.y = clock.center + (clock.radius - clock.translate) * Math.sin(clock.angle);
         ctx.beginPath();
         ctx.arc(clock.x, clock.y, clock.hourSize, 0, clock.circle);
-        ctx.fillStyle = 'green';
+        ctx.fillStyle = clock.color.hour;
         ctx.fill();
-        ctx.font = "25px Sans-serif";
-        ctx.fillStyle = 'white';
+        ctx.font = clock.font;
+        ctx.fillStyle = clock.color.text;
         ctx.fillText(`${i + 1}`, clock.x - clock.hourText, clock.y + clock.hourText);
         ctx.closePath();
     }
 
-    paintArw(clock.minAngle, clock.minArwLen, 'orange', clock.minArwWidth);
-    paintArw(clock.hourAngle, clock.hourArwLen, 'orange', clock.hourArwWidth);
-    paintArw(clock.secAngle, clock.secArwLen, 'red', clock.secArwWidth);
-    ctx.fillStyle = 'orange';
+    paintArw(clock.minAngle, clock.minArwLen, clock.color.arw, clock.minArwWidth);
+    paintArw(clock.hourAngle, clock.hourArwLen, clock.color.arw, clock.hourArwWidth);
+    paintArw(clock.secAngle, clock.secArwLen, clock.color.secArw, clock.secArwWidth);
+    ctx.fillStyle = clock.color.arw;
     ctx.arc(clock.center, clock.center, clock.cDot, 0, clock.circle);
     ctx.fill();
     ctx.closePath();
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = clock.color.text;
     ctx.fillText(`${clock.zerosTime(clock.hour)}:${clock.zerosTime(clock.min)}:${clock.zerosTime(clock.sec)}`, clock.timePos, clock.timePos);
 
     function paintArw(deg, len, color, width) {
