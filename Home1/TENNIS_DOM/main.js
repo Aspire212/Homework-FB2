@@ -5,6 +5,10 @@ const ball = document.createElement('div');
 const leftRc = document.createElement('div');
 const rightRc = document.createElement('div');
 
+ball.classList.add('ball');
+leftRc.classList.add('leftRc');
+rightRc.classList.add('rightRc');
+
 const fieldStyle = {
     border: '1px solid red',
     background: 'yellow',
@@ -47,6 +51,10 @@ field.append(rightRc);
 field.append(leftRc);
 app.append(field);
 
+const ballMove = {
+    x: null,
+    y: null,
+}
 
 
 
