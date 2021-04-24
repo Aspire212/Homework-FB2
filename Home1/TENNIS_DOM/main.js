@@ -83,7 +83,7 @@ const ballMove = {
 
 let timer; 
 
-btnPlay.addEventListener('click', () => timer = setInterval(() => move(), ballMove.speed));
+btnPlay.addEventListener('click', () => timer = setInterval(() => move(), ballMove.speed))
 
 function move(){
     const dataBall = {
@@ -96,7 +96,8 @@ function move(){
     }
     if (dataBall.left + dataBall.size >= field.offsetWidth || 
     dataBall.left <= 0) {
-        ballMove.x = -ballMove.x;
+        clearInterval(timer)
+       ballMove.x = -ballMove.x;
     }
     ballMove.startY += ballMove.y;
     ballMove.startX += ballMove.x;
