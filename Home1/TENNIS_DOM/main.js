@@ -5,13 +5,12 @@ const ball = document.createElement('div');
 const leftRc = document.createElement('div');
 const rightRc = document.createElement('div');
 
-
 ball.classList.add('ball');
 leftRc.classList.add('leftRc');
 rightRc.classList.add('rightRc');
 
 const fieldStyle = {
-    border: '1px solid red',
+    //border: '1px solid red',
     background: 'yellow',
     width: '600px',
     height: '400px',
@@ -56,17 +55,18 @@ field.append(leftRc);
 app.append(field);
 
 const ballMove = {
-    x : noZero(-5, 5),
-    y : noZero(-5, 5),
+    x : noZero(-2, 2),
+    y : noZero(-2, 2),
     startX : 0,
     startY : 0,
-    speed : randomDiap(10, 17),
+    speed : randomDiap(7, 10),
 }
 
 
 
 
-let timer = setInterval(() => move(), ballMove.speed)
+let timer;
+timer = setInterval(() => move(), ballMove.speed)
 
 function move(){
     const dataBall = {
@@ -74,15 +74,19 @@ function move(){
         left : ball.getBoundingClientRect().left,
         size : ball.getBoundingClientRect().height,
     }
-    
-    ballMove.startX += ballMove.x;
-    ballMove.startY += ballMove.y;
-    ball.style.transform = `translate(${ballMove.startX}px, ${ballMove.startY}px)`;
-    console.log(dataBall.top)
-    if (dataBall.top === 400) {
-        clearInterval(timer)
-        console.log(1)
+    if (dataBall.top + dataBall.size >= 400 || dataBall.top <= 0) {
+        ballMove.y = -ballMove.y;
     }
+    if (dataBall.left + dataBall.size >= 600 || 
+    dataBall.left <= 0) {
+        ballMove.x = -ballMove.x;
+    }
+    console.log(ball.offsetLeft)
+    ballMove.startY += ballMove.y;
+    ballMove.startX += ballMove.x;
+    ball.style.transform = `translate(${ballMove.startX}px, ${ballMove.startY}px)`;
+    
+    
 
 }
 
