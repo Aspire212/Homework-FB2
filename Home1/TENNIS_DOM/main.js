@@ -74,30 +74,89 @@ app.append(field);
 app.append(btnPlay);
 
 const ballMove = {
-    x : noZero(-2, 2),
-    y : noZero(-2, 2),
-    startX : 0,
-    startY : 0,
-    speed : randomDiap(8, 10),
+    x: noZero(-2, 2),
+    y: noZero(-2, 2),
+    startX: 0,
+    startY: 0,
+    speed: randomDiap(8, 10),
 }
 
-let timer; 
+const rocketMove = {
+    leftY: 0,
+    rightY: 0,
+    runLR: false,
+    runRR: false,
+}
 
-btnPlay.addEventListener('click', () => timer = setInterval(() => move(), ballMove.speed))
+let timer;
 
-function move(){
-    const dataBall = {
-        top : ball.getBoundingClientRect().top - field.getBoundingClientRect().top,
-        left : ball.getBoundingClientRect().left - field.getBoundingClientRect().left,
-        size : ball.getBoundingClientRect().height,
+btnPlay.addEventListener('click', () => timer = setInterval(() => move(), ballMove.speed));
+window.addEventListener('keydown', (e) => moveRc(e));
+
+function moveRc(e) {
+    let lTimer;
+    switch (e.key) {
+        case 'Control':
+            rocketMove.runLR = !rocketMove.runLR;
+            window.addEventListener('keyup', (e) => {
+                if (e.key === 'Control') {
+                    clearInterval(lTimer);
+                    rocketMove.runLR = !rocketMove.runLR;
+                }
+            });
+
+            if (rocketMove.runLR) {
+                lTimer = setInterval(() => {
+                    leftRc.style.transform = `translateY(${rocketMove.rightY++}px)`;
+                }, 1000 / 60);
+            }
+            break;
+        case 'Shift':
+            rocketMove.runLR = !rocketMove.runLR;
+            moveRocket(rocketMove.runLR, leftRc, rocketMove.leftY, 'Shift');
+            break;
+        case 'ArrowUp':
+            rocketMove.runRR = !rocketMove.runRR;
+            moveRocket(rocketMove.runRR, rightRc, rocketMove.rightY, 'ArrowUp');
+            break;
+        case 'ArrowDown':
+            rocketMove.runRR = !rocketMove.runRR;
+            moveRocket(rocketMove.runRR, rightRc, rocketMove.rightY, 'ArrowDown', false);
+            break;
+
     }
-    if (dataBall.top + dataBall.size >= field.offsetHeight || dataBall.top <= 0) {
+
+}
+
+/*function moveRocket(run, rc, y, key, upDown = true) {
+    run = !run;
+            window.addEventListener('keyup', (e) => {
+                if (e.key === key) {
+                    clearInterval(lTimer);
+                    run = !run;
+                }
+            });
+
+            if (run) {
+                lTimer = setInterval(() => {
+                    leftRc.style.transform = `translateY(${rocketMove.rightY++}px)`;
+                }, 1000 / 60);
+            }
+}*/
+
+function move() {
+    const dataBall = {
+        top: ball.getBoundingClientRect().top - field.getBoundingClientRect().top,
+        left: ball.getBoundingClientRect().left - field.getBoundingClientRect().left,
+        size: ball.getBoundingClientRect().height,
+    }
+    if (dataBall.top + dataBall.size >= field.offsetHeight ||
+        dataBall.top <= 0) {
         ballMove.y = -ballMove.y;
     }
-    if (dataBall.left + dataBall.size >= field.offsetWidth || 
-    dataBall.left <= 0) {
-        clearInterval(timer)
-       ballMove.x = -ballMove.x;
+    if (dataBall.left + dataBall.size >= field.offsetWidth ||
+        dataBall.left <= 0) {
+        ballMove.x = -ballMove.x;
     }
     ballMove.startY += ballMove.y;
     ballMove.startX += ballMove.x;
