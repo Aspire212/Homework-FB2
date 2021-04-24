@@ -5,6 +5,7 @@ const ball = document.createElement('div');
 const leftRc = document.createElement('div');
 const rightRc = document.createElement('div');
 
+
 ball.classList.add('ball');
 leftRc.classList.add('leftRc');
 rightRc.classList.add('rightRc');
@@ -23,15 +24,15 @@ const ballStyle = {
     width: '20px',
     height: '20px',
     position: 'absolute',
-    top: 'calc(50% - 10px)',
-    left: 'calc(50% - 10px)',
+    top: '190px',
+    left: '290px',
 };
 
 class RcStyle {
     width = '20px';
     height = '120px';
     position = 'absolute';
-    top = 'calc(50% - 40px)';
+    top = '140px';
     constructor(left, background) {
         this.left = left;
         this.background = background;
@@ -39,7 +40,10 @@ class RcStyle {
 };
 
 const leftRcStyle = new RcStyle(0, 'green');
-const rightRcStyle = new RcStyle('calc(100% - 20px)', 'lightblue');
+const rightRcStyle = new RcStyle('580px', 'lightblue');
+
+const randomDiap = (n, m) => Math.floor(Math.random() * (m - n + 1)) + n
+
 
 setStyle(fieldStyle, field);
 setStyle(ballStyle, ball);
@@ -52,14 +56,44 @@ field.append(leftRc);
 app.append(field);
 
 const ballMove = {
-    x: null,
-    y: null,
+    x : noZero(-5, 5),
+    y : noZero(-5, 5),
+    startX : 0,
+    startY : 0,
+    speed : randomDiap(10, 17),
 }
 
 
 
 
+let timer = setInterval(() => move(), ballMove.speed)
 
-function setStyle(obj, parent) {
-    return Object.keys(obj).forEach(key => parent.style[key] = obj[key]);
+function move(){
+    const dataBall = {
+        top : ball.getBoundingClientRect().top,
+        left : ball.getBoundingClientRect().left,
+        size : ball.getBoundingClientRect().height,
+    }
+    
+    ballMove.startX += ballMove.x;
+    ballMove.startY += ballMove.y;
+    ball.style.transform = `translate(${ballMove.startX}px, ${ballMove.startY}px)`;
+    console.log(dataBall.top)
+    if (dataBall.top === 400) {
+        clearInterval(timer)
+        console.log(1)
+    }
+
+}
+
+function setStyle(objStyle, parent) {
+    return Object.keys(objStyle).forEach(prop => parent.style[prop] = objStyle[prop]);
+}
+
+function noZero(n, m) {
+    let num = 0;
+    while (num === 0) {
+        num = randomDiap(n, m);
+    }
+    return num;
 }
