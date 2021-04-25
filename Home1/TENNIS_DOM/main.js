@@ -58,6 +58,9 @@ class RcStyle {
     }
 };
 
+const leftRcStyle = new RcStyle(0, 'green');
+const rightRcStyle = new RcStyle('580px', 'blue');
+
 const btnStyle = {
     width: '130px',
     height: '50px',
@@ -91,12 +94,6 @@ const game = {
     scoreLeft: 0,
     scoreRight: 0,
 };
-
-
-const leftRcStyle = new RcStyle(0, 'green');
-const rightRcStyle = new RcStyle('580px', 'blue');
-
-
 
 setStyle(totalStyle, total);
 setStyle(appStyle, app);
