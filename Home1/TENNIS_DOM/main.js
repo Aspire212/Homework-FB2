@@ -68,7 +68,7 @@ const btnStyle = {
 
 
 const leftRcStyle = new RcStyle(0, 'green');
-const rightRcStyle = new RcStyle('580px', 'lightblue');
+const rightRcStyle = new RcStyle('580px', 'blue');
 
 const randomDiap = (n, m) => Math.floor(Math.random() * (m - n + 1)) + n;
 
@@ -94,7 +94,7 @@ const ballMove = {
     y: noZero(-1, 1),
     startX: 0,
     startY: 0,
-    speed: 10,
+    speed: randomDiap(7, 10),
 }
 
 const rocketMove = {
@@ -105,13 +105,13 @@ const rocketMove = {
     lDown: true,
     rUp: true,
     lUp: true,
-    rTimer: null, 
+    rTimer: null,
     lTimer: null,
 }
 
 const game = {
     timer: null,
-    scoreLeft : 0,
+    scoreLeft: 0,
     scoreRight: 0,
 }
 total.textContent = `${game.scoreLeft} : ${game.scoreRight}`;
@@ -123,7 +123,7 @@ btnPlay.addEventListener('click', () => move());
 window.addEventListener('keydown', (e) => moveRc(e));
 
 function move() {
-    if(game.timer){
+    if (game.timer) {
         clearInterval(game.timer)
         clear();
     }
@@ -147,10 +147,11 @@ function move() {
         }
         if (data.left + data.size >= field.offsetWidth ||
             data.left <= 0) {
-            data.left <= 0 ? game.scoreRight++ : game.scoreLeft++
-            clearInterval(game.timer)
+            data.left <= 0 ? game.scoreRight++ : game.scoreLeft++;
+            clearInterval(game.timer);
             total.textContent = `${game.scoreLeft} : ${game.scoreRight}`;
-            setTimeout(() => clear(), 500);
+            setTimeout(() => clear(), 2000);
+            return
         }
         if (data.x === data.rightX - data.width) {
             if (data.y >= data.rightY &&
@@ -213,7 +214,7 @@ function moveRc(e) {
                     rightRc.style.transform = `translateY(${rocketMove.rightY++}px)`;
                     if (rocketMove.rightY > +rightRc.style.top.slice(0, -2)) {
                         rocketMove.rDown = false;
-                        clearInterval(rocketMove.lTimer);
+                        clearInterval(rocketMove.rTimer);
                     }
                 }, rocketMove.speed);
             }
@@ -227,7 +228,7 @@ function moveRc(e) {
                     rightRc.style.transform = `translateY(${rocketMove.rightY--}px)`;
                     if (rocketMove.rightY < -(+rightRc.style.top.slice(0, -2))) {
                         rocketMove.rUp = false;
-                        clearInterval(rocketMove.lTimer);
+                        clearInterval(rocketMove.rTimer);
                     }
                 }, rocketMove.speed);
             }
@@ -248,14 +249,15 @@ function moveRc(e) {
 
 }
 
-function clear(){
-        ballMove.startX = 0;
-        ballMove.startY = 0;
-        ballMove.x = noZero(-1, 1);
-        ballMove.y = noZero(-1, 1);
-        ball.style.transform = 'translate(0, 0)';
-        leftRc.style.transform = 'translate(0, 0)';
-        rightRc.style.transform = 'translate(0, 0)';
+function clear() {
+    ballMove.startX = 0;
+    ballMove.startY = 0;
+    ballMove.x = noZero(-1, 1);
+    ballMove.y = noZero(-1, 1);
+    ballMove.speed = randomDiap(6, 18);
+    ball.style.transform = 'translate(0, 0)';
+    leftRc.style.transform = 'translate(0, 0)';
+    rightRc.style.transform = 'translate(0, 0)';
 }
 
 function setStyle(objStyle, parent) {
