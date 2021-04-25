@@ -8,3 +8,7 @@
 body {
     background: rgb(55, 73, 85);
 }
+.total{
+    background: green;
+    height: 100px;
+}

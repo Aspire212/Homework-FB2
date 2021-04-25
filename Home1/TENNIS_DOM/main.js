@@ -1,16 +1,26 @@
 'use strict';
 const app = document.querySelector('#app');
+const total = document.createElement('div')
 const field = document.createElement('div');
 const ball = document.createElement('div');
 const leftRc = document.createElement('div');
 const rightRc = document.createElement('div');
 const btnPlay = document.createElement('button');
 
-btnPlay.textContent = 'Играть!';
 
 ball.classList.add('ball');
 leftRc.classList.add('leftRc');
 rightRc.classList.add('rightRc');
+
+const totalStyle = {
+    height: '100px',
+    width: '600px',
+    color: 'white',
+    textAlign: 'center',
+    lineHeight: '100px',
+    fontSize: '50px',
+    fontFamily: 'Arial sans-serif',
+};
 
 const appStyle = {
     display: 'flex',
@@ -49,10 +59,11 @@ class RcStyle {
 };
 
 const btnStyle = {
-    width: '120px',
+    width: '130px',
     height: '50px',
     fontSize: '30px',
     margin: '40px',
+    padding: '2px',
 };
 
 
@@ -61,6 +72,7 @@ const rightRcStyle = new RcStyle('580px', 'lightblue');
 
 const randomDiap = (n, m) => Math.floor(Math.random() * (m - n + 1)) + n;
 
+setStyle(totalStyle, total);
 setStyle(appStyle, app);
 setStyle(fieldStyle, field);
 setStyle(ballStyle, ball);
@@ -71,8 +83,11 @@ setStyle(btnStyle, btnPlay);
 field.append(ball);
 field.append(rightRc);
 field.append(leftRc);
+app.append(total);
 app.append(field);
 app.append(btnPlay);
+
+
 
 const ballMove = {
     x: noZero(-1, 1),
@@ -90,16 +105,29 @@ const rocketMove = {
     lDown: true,
     rUp: true,
     lUp: true,
+    rTimer: null, 
+    lTimer: null,
 }
 
-let timer;
+const game = {
+    timer: null,
+    scoreLeft : 0,
+    scoreRight: 0,
+}
+total.textContent = `${game.scoreLeft} : ${game.scoreRight}`;
+btnPlay.textContent = 'Играть!';
+
+
 
 btnPlay.addEventListener('click', () => move());
 window.addEventListener('keydown', (e) => moveRc(e));
 
 function move() {
-    //добавить проверку на таймер
-    timer = setInterval(() => {
+    if(game.timer){
+        clearInterval(game.timer)
+        clear();
+    }
+    game.timer = setInterval(() => {
         const data = {
             x: ball.getBoundingClientRect().x,
             y: ball.getBoundingClientRect().y,
@@ -119,8 +147,10 @@ function move() {
         }
         if (data.left + data.size >= field.offsetWidth ||
             data.left <= 0) {
-            ballMove.x = -ballMove.x;
-
+            data.left <= 0 ? game.scoreRight++ : game.scoreLeft++
+            clearInterval(game.timer)
+            total.textContent = `${game.scoreLeft} : ${game.scoreRight}`;
+            setTimeout(() => clear(), 500);
         }
         if (data.x === data.rightX - data.width) {
             if (data.y >= data.rightY &&
@@ -134,16 +164,6 @@ function move() {
                 data.y <= data.leftY + data.height) {
                 ballMove.x = -ballMove.x;
             }
-
-
-
-            /*clearInterval(timer)
-            setTimeout(() => {
-                ball.style = null;
-                ballMove.startX = 0;
-                ballMove.startY = 0;
-                setStyle(ballStyle, ball);
-            }, 300);*/
         }
         ballMove.startY += ballMove.y;
         ballMove.startX += ballMove.x;
@@ -155,19 +175,17 @@ function moveRc(e) {
     if (e.repeat) {
         return;
     }
-    let lTimer;
-    let rTimer;
     switch (e.key) {
         case 'Control':
             if (!rocketMove.lUp) {
                 rocketMove.lUp = true;
             }
             if (rocketMove.lDown) {
-                lTimer = setInterval(() => {
+                rocketMove.lTimer = setInterval(() => {
                     leftRc.style.transform = `translateY(${rocketMove.leftY++}px)`;
                     if (rocketMove.leftY > +leftRc.style.top.slice(0, -2)) {
                         rocketMove.lDown = false;
-                        clearInterval(lTimer);
+                        clearInterval(rocketMove.lTimer);
                     }
                 }, rocketMove.speed);
             }
@@ -177,26 +195,25 @@ function moveRc(e) {
                 rocketMove.lDown = true;
             }
             if (rocketMove.lUp) {
-                lTimer = setInterval(() => {
+                rocketMove.lTimer = setInterval(() => {
                     leftRc.style.transform = `translateY(${rocketMove.leftY--}px)`;
                     if (rocketMove.leftY < -(+leftRc.style.top.slice(0, -2))) {
                         rocketMove.lUp = false;
-                        clearInterval(lTimer);
+                        clearInterval(rocketMove.lTimer);
                     }
                 }, rocketMove.speed);
             }
             break;
         case 'ArrowDown':
-            console.log(e.key)
             if (!rocketMove.rUp) {
                 rocketMove.rUp = true;
             }
             if (rocketMove.rDown) {
-                rTimer = setInterval(() => {
+                rocketMove.rTimer = setInterval(() => {
                     rightRc.style.transform = `translateY(${rocketMove.rightY++}px)`;
                     if (rocketMove.rightY > +rightRc.style.top.slice(0, -2)) {
                         rocketMove.rDown = false;
-                        clearInterval(lTimer);
+                        clearInterval(rocketMove.lTimer);
                     }
                 }, rocketMove.speed);
             }
@@ -206,11 +223,11 @@ function moveRc(e) {
                 rocketMove.rDown = true;
             }
             if (rocketMove.rUp) {
-                rTimer = setInterval(() => {
+                rocketMove.rTimer = setInterval(() => {
                     rightRc.style.transform = `translateY(${rocketMove.rightY--}px)`;
                     if (rocketMove.rightY < -(+rightRc.style.top.slice(0, -2))) {
                         rocketMove.rUp = false;
-                        clearInterval(lTimer);
+                        clearInterval(rocketMove.lTimer);
                     }
                 }, rocketMove.speed);
             }
@@ -220,17 +237,26 @@ function moveRc(e) {
     window.addEventListener('keyup', (e) => {
         if (e.key === 'Control' ||
             e.key === 'Shift') {
-            clearInterval(lTimer);
+            clearInterval(rocketMove.lTimer);
         }
         if (e.key === 'ArrowUp' ||
             e.key === 'ArrowDown') {
-            clearInterval(rTimer);
+            clearInterval(rocketMove.rTimer);
         }
 
     });
 
 }
 
+function clear(){
+        ballMove.startX = 0;
+        ballMove.startY = 0;
+        ballMove.x = noZero(-1, 1);
+        ballMove.y = noZero(-1, 1);
+        ball.style.transform = 'translate(0, 0)';
+        leftRc.style.transform = 'translate(0, 0)';
+        rightRc.style.transform = 'translate(0, 0)';
+}
 
 function setStyle(objStyle, parent) {
     return Object.keys(objStyle).forEach(prop => parent.style[prop] = objStyle[prop]);
