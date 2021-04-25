@@ -6,7 +6,7 @@ const ball = document.createElement('div');
 const leftRc = document.createElement('div');
 const rightRc = document.createElement('div');
 const btnPlay = document.createElement('button');
-
+const randomDiap = (n, m) => Math.floor(Math.random() * (m - n + 1)) + n;
 
 ball.classList.add('ball');
 leftRc.classList.add('leftRc');
@@ -96,7 +96,7 @@ const game = {
 const leftRcStyle = new RcStyle(0, 'green');
 const rightRcStyle = new RcStyle('580px', 'blue');
 
-const randomDiap = (n, m) => Math.floor(Math.random() * (m - n + 1)) + n;
+
 
 setStyle(totalStyle, total);
 setStyle(appStyle, app);
