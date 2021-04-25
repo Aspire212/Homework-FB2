@@ -66,6 +66,32 @@ const btnStyle = {
     padding: '2px',
 };
 
+const ballMove = {
+    x: noZero(-1, 1),
+    y: noZero(-1, 1),
+    startX: 0,
+    startY: 0,
+    speed: randomDiap(7, 10),
+};
+
+const rocketMove = {
+    leftY: 0,
+    rightY: 0,
+    speed: 5,
+    rDown: true,
+    lDown: true,
+    rUp: true,
+    lUp: true,
+    rTimer: null,
+    lTimer: null,
+};
+
+const game = {
+    timer: null,
+    scoreLeft: 0,
+    scoreRight: 0,
+};
+
 
 const leftRcStyle = new RcStyle(0, 'green');
 const rightRcStyle = new RcStyle('580px', 'blue');
@@ -88,32 +114,6 @@ app.append(field);
 app.append(btnPlay);
 
 
-
-const ballMove = {
-    x: noZero(-1, 1),
-    y: noZero(-1, 1),
-    startX: 0,
-    startY: 0,
-    speed: randomDiap(7, 10),
-}
-
-const rocketMove = {
-    leftY: 0,
-    rightY: 0,
-    speed: 5,
-    rDown: true,
-    lDown: true,
-    rUp: true,
-    lUp: true,
-    rTimer: null,
-    lTimer: null,
-}
-
-const game = {
-    timer: null,
-    scoreLeft: 0,
-    scoreRight: 0,
-}
 total.textContent = `${game.scoreLeft} : ${game.scoreRight}`;
 btnPlay.textContent = 'Играть!';
 
@@ -233,8 +233,8 @@ function moveRc(e) {
                 }, rocketMove.speed);
             }
             break;
-
     }
+
     window.addEventListener('keyup', (e) => {
         if (e.key === 'Control' ||
             e.key === 'Shift') {
