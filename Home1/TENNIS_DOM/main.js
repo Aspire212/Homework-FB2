@@ -24,6 +24,7 @@ const fieldStyle = {
     width: '600px',
     height: '400px',
     position: 'relative',
+    overflow: 'hidden',
 };
 
 const ballStyle = {
@@ -90,7 +91,7 @@ const rocketMove = {
 
 let timer;
 
-btnPlay.addEventListener('click', () => timer = setInterval(() => move(), ballMove.speed));
+btnPlay.addEventListener('click', () =>  move());
 window.addEventListener('keydown', (e) => moveRc(e));
 
 function moveRc(e) {
@@ -145,22 +146,33 @@ function moveRc(e) {
 }*/
 
 function move() {
-    const dataBall = {
-        top: ball.getBoundingClientRect().top - field.getBoundingClientRect().top,
-        left: ball.getBoundingClientRect().left - field.getBoundingClientRect().left,
-        size: ball.getBoundingClientRect().height,
-    }
-    if (dataBall.top + dataBall.size >= field.offsetHeight ||
-        dataBall.top <= 0) {
-        ballMove.y = -ballMove.y;
-    }
-    if (dataBall.left + dataBall.size >= field.offsetWidth ||
-        dataBall.left <= 0) {
-        ballMove.x = -ballMove.x;
-    }
-    ballMove.startY += ballMove.y;
-    ballMove.startX += ballMove.x;
-    ball.style.transform = `translate(${ballMove.startX}px, ${ballMove.startY}px)`
+    //добавить проверку на таймер
+    timer = setInterval(() => {
+        const dataBall = {
+            top: ball.getBoundingClientRect().top - field.getBoundingClientRect().top,
+            left: ball.getBoundingClientRect().left - field.getBoundingClientRect().left,
+            size: ball.getBoundingClientRect().height,
+        }
+        if (dataBall.top + dataBall.size >= field.offsetHeight ||
+            dataBall.top <= 0) {
+            ballMove.y = -ballMove.y;
+        }
+        if (dataBall.left + dataBall.size >= field.offsetWidth ||
+            dataBall.left <= 0) {
+            //ballMove.x = -ballMove.x;
+            //завернуть в функцию
+            clearInterval(timer)
+            setTimeout(() => {
+                ball.style = null;
+                ballMove.startX = 0;
+                ballMove.startY = 0;
+                setStyle(ballStyle, ball);
+            }, 300);
+        }
+        ballMove.startY += ballMove.y;
+        ballMove.startX += ballMove.x;
+        ball.style.transform = `translate(${ballMove.startX}px, ${ballMove.startY}px)`;
+    }, ballMove.speed);
 }
 
 function setStyle(objStyle, parent) {
