@@ -75,105 +75,162 @@ app.append(field);
 app.append(btnPlay);
 
 const ballMove = {
-    x: noZero(-2, 2),
-    y: noZero(-2, 2),
+    x: noZero(-1, 1),
+    y: noZero(-1, 1),
     startX: 0,
     startY: 0,
-    speed: randomDiap(8, 10),
+    speed: 10,
 }
 
 const rocketMove = {
     leftY: 0,
     rightY: 0,
-    runLR: false,
-    runRR: false,
+    speed: 5,
+    rDown: true,
+    lDown: true,
+    rUp: true,
+    lUp: true,
 }
 
 let timer;
 
-btnPlay.addEventListener('click', () =>  move());
+btnPlay.addEventListener('click', () => move());
 window.addEventListener('keydown', (e) => moveRc(e));
-
-function moveRc(e) {
-    let lTimer;
-    switch (e.key) {
-        case 'Control':
-            rocketMove.runLR = !rocketMove.runLR;
-            window.addEventListener('keyup', (e) => {
-                if (e.key === 'Control') {
-                    clearInterval(lTimer);
-                    rocketMove.runLR = !rocketMove.runLR;
-                }
-            });
-
-            if (rocketMove.runLR) {
-                lTimer = setInterval(() => {
-                    leftRc.style.transform = `translateY(${rocketMove.rightY++}px)`;
-                }, 1000 / 60);
-            }
-            break;
-        case 'Shift':
-            rocketMove.runLR = !rocketMove.runLR;
-            moveRocket(rocketMove.runLR, leftRc, rocketMove.leftY, 'Shift');
-            break;
-        case 'ArrowUp':
-            rocketMove.runRR = !rocketMove.runRR;
-            moveRocket(rocketMove.runRR, rightRc, rocketMove.rightY, 'ArrowUp');
-            break;
-        case 'ArrowDown':
-            rocketMove.runRR = !rocketMove.runRR;
-            moveRocket(rocketMove.runRR, rightRc, rocketMove.rightY, 'ArrowDown', false);
-            break;
-
-    }
-
-}
-
-/*function moveRocket(run, rc, y, key, upDown = true) {
-    run = !run;
-            window.addEventListener('keyup', (e) => {
-                if (e.key === key) {
-                    clearInterval(lTimer);
-                    run = !run;
-                }
-            });
-
-            if (run) {
-                lTimer = setInterval(() => {
-                    leftRc.style.transform = `translateY(${rocketMove.rightY++}px)`;
-                }, 1000 / 60);
-            }
-}*/
 
 function move() {
     //добавить проверку на таймер
     timer = setInterval(() => {
-        const dataBall = {
+        const data = {
+            x: ball.getBoundingClientRect().x,
+            y: ball.getBoundingClientRect().y,
             top: ball.getBoundingClientRect().top - field.getBoundingClientRect().top,
             left: ball.getBoundingClientRect().left - field.getBoundingClientRect().left,
             size: ball.getBoundingClientRect().height,
+            leftX: leftRc.getBoundingClientRect().x,
+            leftY: leftRc.getBoundingClientRect().y,
+            rightX: rightRc.getBoundingClientRect().x,
+            rightY: rightRc.getBoundingClientRect().y,
+            width: rightRc.getBoundingClientRect().width,
+            height: rightRc.getBoundingClientRect().height,
         }
-        if (dataBall.top + dataBall.size >= field.offsetHeight ||
-            dataBall.top <= 0) {
+        if (data.top + data.size >= field.offsetHeight ||
+            data.top <= 0) {
             ballMove.y = -ballMove.y;
         }
-        if (dataBall.left + dataBall.size >= field.offsetWidth ||
-            dataBall.left <= 0) {
-            //ballMove.x = -ballMove.x;
-            //завернуть в функцию
-            clearInterval(timer)
+        if (data.left + data.size >= field.offsetWidth ||
+            data.left <= 0) {
+            ballMove.x = -ballMove.x;
+
+        }
+        if (data.x === data.rightX - data.width) {
+            if (data.y >= data.rightY &&
+                data.y <= data.rightY + data.height) {
+                ballMove.x = -ballMove.x;
+            }
+        }
+        if (data.x === data.leftX + data.width) {
+
+            if (data.y >= data.leftY &&
+                data.y <= data.leftY + data.height) {
+                ballMove.x = -ballMove.x;
+            }
+
+
+
+            /*clearInterval(timer)
             setTimeout(() => {
                 ball.style = null;
                 ballMove.startX = 0;
                 ballMove.startY = 0;
                 setStyle(ballStyle, ball);
-            }, 300);
+            }, 300);*/
         }
         ballMove.startY += ballMove.y;
         ballMove.startX += ballMove.x;
         ball.style.transform = `translate(${ballMove.startX}px, ${ballMove.startY}px)`;
     }, ballMove.speed);
 }
+
+function moveRc(e) {
+    if (e.repeat) {
+        return;
+    }
+    let lTimer;
+    let rTimer;
+    switch (e.key) {
+        case 'Control':
+            if (!rocketMove.lUp) {
+                rocketMove.lUp = true;
+            }
+            if (rocketMove.lDown) {
+                lTimer = setInterval(() => {
+                    leftRc.style.transform = `translateY(${rocketMove.leftY++}px)`;
+                    if (rocketMove.leftY > +leftRc.style.top.slice(0, -2)) {
+                        rocketMove.lDown = false;
+                        clearInterval(lTimer);
+                    }
+                }, rocketMove.speed);
+            }
+            break;
+        case 'Shift':
+            if (!rocketMove.lDown) {
+                rocketMove.lDown = true;
+            }
+            if (rocketMove.lUp) {
+                lTimer = setInterval(() => {
+                    leftRc.style.transform = `translateY(${rocketMove.leftY--}px)`;
+                    if (rocketMove.leftY < -(+leftRc.style.top.slice(0, -2))) {
+                        rocketMove.lUp = false;
+                        clearInterval(lTimer);
+                    }
+                }, rocketMove.speed);
+            }
+            break;
+        case 'ArrowDown':
+            console.log(e.key)
+            if (!rocketMove.rUp) {
+                rocketMove.rUp = true;
+            }
+            if (rocketMove.rDown) {
+                rTimer = setInterval(() => {
+                    rightRc.style.transform = `translateY(${rocketMove.rightY++}px)`;
+                    if (rocketMove.rightY > +rightRc.style.top.slice(0, -2)) {
+                        rocketMove.rDown = false;
+                        clearInterval(lTimer);
+                    }
+                }, rocketMove.speed);
+            }
+            break;
+        case 'ArrowUp':
+            if (!rocketMove.rDown) {
+                rocketMove.rDown = true;
+            }
+            if (rocketMove.rUp) {
+                rTimer = setInterval(() => {
+                    rightRc.style.transform = `translateY(${rocketMove.rightY--}px)`;
+                    if (rocketMove.rightY < -(+rightRc.style.top.slice(0, -2))) {
+                        rocketMove.rUp = false;
+                        clearInterval(lTimer);
+                    }
+                }, rocketMove.speed);
+            }
+            break;
+
+    }
+    window.addEventListener('keyup', (e) => {
+        if (e.key === 'Control' ||
+            e.key === 'Shift') {
+            clearInterval(lTimer);
+        }
+        if (e.key === 'ArrowUp' ||
+            e.key === 'ArrowDown') {
+            clearInterval(rTimer);
+        }
+
+    });
+
+}
+
 
 function setStyle(objStyle, parent) {
     return Object.keys(objStyle).forEach(prop => parent.style[prop] = objStyle[prop]);
