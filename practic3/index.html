@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="titleWrapper">
+        <div data-tabs="1" class="title titleActive">
+            <h3>HR</h3>
+        </div>
+        <div data-tabs="2" class="title">
+            <h3>Наполнение</h3>
+        </div>
+        <div data-tabs="3" class="title">
+            <h3>Логистика</h3>
+        </div>
+        <div data-tabs="4" class="title">
+            <h3>Директор</h3>
+        </div>
+
+
+    </div>
+    <div class="wrapperInfo">
+        <div data-tabs="1" class="tabInfo infoActive">
+            <form action="#" method="get" accept-charset="utf-8" name="hr">
+
+                <div>
+                    <div class="text">
+                        Имя
+                    </div>
+                    <input type="text" name="firstName" />
+                </div>
+                <div>
+                    <div class="text">
+                        Фамилия
+                    </div>
+                    <input type="text" name="lastName">
+                </div>
+                <div>
+                    <div class="text">
+                        Должность
+                    </div>
+                    <input type="text" name="position" />
+                </div>
+                <div>
+                    <div class="text">
+                        З/п
+                    </div>
+                    <div>
+                        от <input type="number" name="min" /> до <input type="number" name="max" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text">
+                        Гражданство
+                    </div>
+                    <input type="text" name="citizenship" />
+                </div>
+                <div>
+                    <div class="text">
+                        Место жительства
+                    </div>
+                    <input type="text" name="placeLiving" />
+                </div>
+                <div>
+                    <div class="text">
+                        Образование
+                    </div>
+                    <select name="education">
+					<option value="Базовое" selected>Базовое</option>
+					<option value="Среднее">Среднее</option>
+					<option value="Высшее">Высшее</option>
+			  </select>
+                </div>
+                <div>
+                    <div class="text">
+                        Пол
+                    </div>
+                    <input type="radio" name="gender" value="Мужчина" checked="checked">M
+                    <input type="radio" name="gender" value="Женщина">Ж
+                </div>
+                <div>
+                    <div class="text">
+                        Семейное положение
+                    </div>
+                    <input type="checkbox" name="status" />
+                </div>
+                <div>
+                    <div class="text">
+                        Дата рождения
+                    </div>
+                    <input type="date" name="birthda" />
+                </div>
+                <button id="save">Сохранить</button>
+            </form>
+        </div>
+        <div data-tabs="2" class="tabInfo">filling</div>
+        <div data-tabs="3" class="tabInfo">logistic</div>
+        <div data-tabs="4" id="test" class="tabInfo">Директор
+            <button id="getObj">тест</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
