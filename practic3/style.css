@@ -28,11 +28,12 @@ form>div {
     width: 200px;
     text-align: center;
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .title:hover {
     color: rgb(198, 192, 235);
-    border: 4px solid rgb(198, 192, 235);
+    border: 3px solid rgb(198, 192, 235);
 }
 
 .title:active {
@@ -43,20 +44,17 @@ form>div {
 .tabInfo {
     padding: 20px;
     background: #43A2BB;
-    transition: all .6s ease-in-out;
+    transition: all .2s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
 }
 
 .wrapperInfo {
     position: relative;
 }
 
-.tabInfo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: all .6s ease-in-out;
-}
 
 .infoActive {
     opacity: 1;
@@ -65,4 +63,9 @@ form>div {
 .titleActive {
     color: white;
     background: blue;
+}
+
+.money{
+    display: flex;
+    flex-direction: column;
 }

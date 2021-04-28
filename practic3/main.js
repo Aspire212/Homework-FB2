@@ -3,10 +3,12 @@ const allTitle = document.querySelectorAll('.title');
 const allTabsInfo = document.querySelectorAll('.tabInfo');
 
 const formHr = document.forms.hr
-const saveHr = document.querySelector('#save');
+const saveHr = document.querySelector('#saveHr');
 const getObj = document.querySelector('#getObj');
 const globalData = {
     hrData: [],
+    filData: [],
+    logData: [],
 };
 
 allTitle.forEach(title => {
@@ -39,7 +41,7 @@ function clearClass(arr, active) {
 
 
 
-class HR {
+class Global {
     constructor(pers) {
         Object.keys(pers).forEach(key => {
             this[key] = pers[key];
@@ -63,18 +65,14 @@ saveHr.addEventListener('click', (e) => {
     let tempObj = {};
     for (let input of formHr) {
         if (input.name) {
-            if (input.type === 'checkbox') {
-                input.value === '' ? input.value = 'Женат / замужем' : input.value = 'Не женат / не замужем'
-            }
             tempObj[input.name] = input.value;
         }
         setTimeout(() => {
-            input.value = "";
+            formHr.reset();
             tempObj = {};
-
         }, 100);
     }
-    const newPers = new HR(tempObj);
+    const newPers = new Global(tempObj);
     globalData.hrData.push(newPers);
 });
 
