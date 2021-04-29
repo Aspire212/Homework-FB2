@@ -1,7 +1,6 @@
 'use strict';
 const allTitle = document.querySelectorAll('.title');
 const allTabsInfo = document.querySelectorAll('.tabInfo');
-
 const formHr = document.forms.hr
 const saveHr = document.querySelector('#saveHr');
 const getObj = document.querySelector('#getObj');
@@ -10,7 +9,6 @@ const globalData = {
     filData: [],
     logData: [],
 };
-
 allTitle.forEach(title => {
     title.addEventListener('click', function(e) {
         if (!this.classList.contains('titleActive')) {
@@ -35,12 +33,6 @@ function clearClass(arr, active) {
         }
     });
 }
-
-
-
-
-
-
 class Global {
     constructor(pers) {
         Object.keys(pers).forEach(key => {
@@ -50,30 +42,33 @@ class Global {
     createList(par) {
         let ul = document.createElement('ul')
         Object.values(this).forEach(val => {
-            if (val.length > 0) {
+            if (val.length > 0 || val instanceof Object) {
                 let li = document.createElement('li');
-                li.textContent = val;
+                if (val instanceof Object) {
+                    li.textContent = 'Характеристики:';
+                    this.createList.call(val, par);
+                }
+                else {
+                    li.textContent = val;
+                }
                 ul.append(li);
             }
         });
         return par.append(ul);
     }
 }
-
 saveHr.addEventListener('click', (e) => {
     e.preventDefault();
+    let data = new FormData(formHr);
     let tempObj = {};
-    for (let input of formHr) {
-        if (input.name) {
-            tempObj[input.name] = input.value;
-        }
-        setTimeout(() => {
-            formHr.reset();
-            tempObj = {};
-        }, 100);
-    }
-    const newPers = new Global(tempObj);
+    data.forEach((value, name) => {
+        tempObj[name] = value;
+    });
+    let newPers = new Global(tempObj);
     globalData.hrData.push(newPers);
+    setTimeout(() => {
+        formHr.reset();
+        tempObj = {};
+    }, 100);
 });
-
 getObj.onclick = () => globalData.hrData.forEach(el => el.createList(test))
