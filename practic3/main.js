@@ -9,6 +9,9 @@ const globalData = {
     filData: [],
     logData: [],
 };
+
+
+
 allTitle.forEach(title => {
     title.addEventListener('click', function(e) {
         if (!this.classList.contains('titleActive')) {
@@ -33,6 +36,8 @@ function clearClass(arr, active) {
         }
     });
 }
+
+
 class Global {
     constructor(pers) {
         Object.keys(pers).forEach(key => {

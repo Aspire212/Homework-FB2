@@ -24,7 +24,6 @@
             <h3>Директор</h3>
         </div>
 
-
     </div>
     <div class="wrapperInfo">
         <div data-tabs="1" class="tabInfo infoActive">
@@ -53,7 +52,9 @@
                         З/п
                     </div>
                     <div class="money">
-                        от <input type="number" name="min" /> до <input type="number" name="max" />
+                        от
+                        <input type="number" name="min" /> до
+                        <input type="number" name="max" />
                     </div>
                 </div>
 
@@ -74,10 +75,10 @@
                         Образование
                     </div>
                     <select name="education">
-					<option value="Базовое" selected>Базовое</option>
-					<option value="Среднее">Среднее</option>
-					<option value="Высшее">Высшее</option>
-			  </select>
+                        <option value="Базовое" selected>Базовое</option>
+                        <option value="Среднее">Среднее</option>
+                        <option value="Высшее">Высшее</option>
+                    </select>
                 </div>
                 <div>
                     <div class="text">
@@ -90,7 +91,7 @@
                     <div class="text">
                         Семейное положение
                     </div>
-                    <input type="checkbox" name="status" value="Женат/замужем"/>
+                    <input type="checkbox" name="status" value="Женат/замужем" />
                 </div>
                 <div>
                     <div class="text">
@@ -101,7 +102,79 @@
                 <button id="saveHr">Сохранить</button>
             </form>
         </div>
-        <div data-tabs="2" class="tabInfo">filling</div>
+        <div data-tabs="2" class="tabInfo">
+            <form action="#" name="filling">
+                <div>
+                    <div class="text">
+                        Тип товара
+                    </div>
+                    <select name="productType" id="selType">
+                        <option value="Телевизор">Телевизор</option>
+                        <option value="ноутбук">Ноутбук</option>
+                        <option value="Смартфон">Смартфон</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="text">
+                        Производитель
+                    </div>
+                    <select name="productType">
+                        <option value="Samsung">Samsung</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Sony">Sony</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div class="text">
+                        Магазины
+                    </div>
+                    <select name="shop">
+                        <option value="Техносила">Техносила</option>
+                        <option value="Электросила">Электросила</option>
+                        <option value="5элемент">5элемент</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div class="text">
+                        Дата выхода
+                    </div>
+                    <input type="date" name="realese" />
+                </div>
+
+                <div>
+                    <div class="text">
+                        Гарантия
+                    </div>
+                    <select name="guarantee">
+                        <option value="6 месяцев">6 месяцев</option>
+                        <option value="1 год">1 год</option>
+                        <option value="2 года">2 года</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div class="text">
+                        Акция
+                    </div>
+                    <input type="checkbox" name="stock" />
+                </div>
+                <div class="charWrap">
+                    <button class="charSet">Характеристики</button>
+                    <div class="modalChar">
+                        <div class="selTv">
+                        </div>
+                        <div class="selNotebuk">
+                            
+                        </div>
+                        <div class="selSmart">
+                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div data-tabs="3" class="tabInfo">logistic</div>
         <div data-tabs="4" id="test" class="tabInfo">Директор
             <button id="getObj">тест</button>
