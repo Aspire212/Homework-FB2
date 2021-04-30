@@ -100,10 +100,9 @@ getObj.addEventListener('click', () => globalData.hrData.forEach(el => el.create
 
 chaSret.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log(modal.classList)
-    modal.classList.add('modalChar_active')
-})
-closeModal.addEventListener('click', () => modal.classList.remove('modalChar_active'))
+    modal.classList.add('modalChar_active');
+});
+closeModal.addEventListener('click', () => modal.classList.remove('modalChar_active'));
 
 /*
     MODAL
