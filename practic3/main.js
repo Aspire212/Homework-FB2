@@ -103,7 +103,6 @@ getObj.addEventListener('click', () => globalData.hrData.forEach(el => el.create
 changeModal.addEventListener('change', () => {
     selItem.forEach(div => {
         div.style.zIndex = 0;
-        console.log(div)
         if (div.dataset.section === changeModal.value) {
             div.style.zIndex = 1;
         }
