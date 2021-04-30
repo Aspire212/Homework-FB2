@@ -9,6 +9,7 @@ body {
     background: #43A2BB;
 }
 
+.modalChar>div>div,
 form>div {
     display: flex;
     margin: 10px 0;
@@ -55,7 +56,6 @@ form>div {
     position: relative;
 }
 
-
 .infoActive {
     opacity: 1;
 }
@@ -65,8 +65,21 @@ form>div {
     background: blue;
 }
 
-.money{
+.money {
     display: flex;
     flex-direction: column;
 }
 
+.modalChar {
+    background: rgba(41, 4, 75, 0.7);
+    ;
+    color: cornsilk;
+    position: absolute;
+    top: -500px;
+    left: 50px;
+    width: 50vw;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
