@@ -71,15 +71,34 @@ form>div {
 }
 
 .modalChar {
-    background: rgba(41, 4, 75, 0.7);
+    background: rgba(8, 2, 34, 0.95);
     ;
     color: cornsilk;
     position: absolute;
-    top: -500px;
+    top: -550px;
     left: 50px;
     width: 50vw;
     height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: inset 0 0 10px rgb(29, 182, 202);
+    transition: all .5s ease-in-out;
+}
+
+.modalChar_active {
+    transform: translateY(550px);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 35px;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.close:hover {
+    color: red;
 }

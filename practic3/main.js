@@ -4,14 +4,20 @@ const allTabsInfo = document.querySelectorAll('.tabInfo');
 const formHr = document.forms.hr
 const saveHr = document.querySelector('#saveHr');
 const getObj = document.querySelector('#getObj');
+const closeModal = document.querySelector('.close');
+const modal = document.querySelector('.modalChar');
+const chaSret = document.querySelector('.charSet');
 const globalData = {
     hrData: [],
     filData: [],
     logData: [],
 };
 
+const char = {};
 
-
+/*
+    Tabs
+*/
 allTitle.forEach(title => {
     title.addEventListener('click', function(e) {
         if (!this.classList.contains('titleActive')) {
@@ -37,6 +43,9 @@ function clearClass(arr, active) {
     });
 }
 
+/*
+    Tabs
+*/
 
 class Global {
     constructor(pers) {
@@ -52,8 +61,7 @@ class Global {
                 if (val instanceof Object) {
                     li.textContent = 'Характеристики:';
                     this.createList.call(val, par);
-                }
-                else {
+                } else {
                     li.textContent = val;
                 }
                 ul.append(li);
@@ -62,6 +70,8 @@ class Global {
         return par.append(ul);
     }
 }
+
+
 saveHr.addEventListener('click', (e) => {
     e.preventDefault();
     let data = new FormData(formHr);
@@ -69,11 +79,50 @@ saveHr.addEventListener('click', (e) => {
     data.forEach((value, name) => {
         tempObj[name] = value;
     });
-    let newPers = new Global(tempObj);
-    globalData.hrData.push(newPers);
+    let newData = new Global(tempObj);
+    globalData.hrData.push(newData);
     setTimeout(() => {
         formHr.reset();
         tempObj = {};
     }, 100);
 });
-getObj.onclick = () => globalData.hrData.forEach(el => el.createList(test))
+
+
+
+getObj.addEventListener('click', () => globalData.hrData.forEach(el => el.createList(test)));
+
+
+
+
+/*
+    MODAL
+*/
+
+chaSret.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log(modal.classList)
+    modal.classList.add('modalChar_active')
+})
+closeModal.addEventListener('click', () => modal.classList.remove('modalChar_active'))
+
+/*
+    MODAL
+*/
+
+
+
+
+function pushData(formName, arrName) {
+    let data = new FormData(formName);
+    let tempObj = {};
+    data.forEach((value, name) => {
+        tempObj[name] = value;
+    });
+    let newData = new Global(tempObj);
+    arrName.push(newData);
+    setTimeout(() => {
+        formName.reset();
+        tempObj = {};
+    }, 100);
+
+}
