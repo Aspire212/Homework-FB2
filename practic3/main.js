@@ -107,7 +107,6 @@ changeModal.addEventListener('change', () => {
         if (div.dataset.section === changeModal.value) {
             div.style.zIndex = 1;
         }
-        console.log(div)
     });
 
 });
@@ -123,7 +122,7 @@ closeModal.addEventListener('click', () => modal.classList.remove('modalChar_act
 smallForm.forEach(btn => {
     btn.addEventListener('click', function(e) {
         e.preventDefault();
-    })
+    });
 });
 
 /*
