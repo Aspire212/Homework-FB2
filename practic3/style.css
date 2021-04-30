@@ -71,7 +71,7 @@ form>div {
 }
 
 .modalChar {
-    background: rgba(8, 2, 34, 0.95);
+    background: rgba(8, 2, 34, .99);
     ;
     color: cornsilk;
     position: absolute;
@@ -79,11 +79,19 @@ form>div {
     left: 50px;
     width: 50vw;
     height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     box-shadow: inset 0 0 10px rgb(29, 182, 202);
     transition: all .5s ease-in-out;
+}
+
+.modalChar>form {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    background: rgba(8, 2, 34, 1);
+}
+
+.modalChar select {
+    min-width: 100px;
 }
 
 .modalChar_active {

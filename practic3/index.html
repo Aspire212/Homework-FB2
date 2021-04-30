@@ -108,10 +108,10 @@
                     <div class="text">
                         Тип товара
                     </div>
-                    <select name="productType" id="selType">
-                        <option value="Телевизор">Телевизор</option>
-                        <option value="ноутбук">Ноутбук</option>
-                        <option value="Смартфон">Смартфон</option>
+                    <select name="productType" id="changeModal">
+                        <option value="smart">Смартфон</option>
+                        <option value="tv">Телевизор</option>
+                        <option value="notebook">Ноутбук</option>
                     </select>
                 </div>
                 <div>
@@ -172,15 +172,16 @@
     </div>
     <div class="modalChar">
         <span class="close">&times;</span>
-        <div class="selTv">
+        <form data-section="tv" class="sel">
+            <h3>Телевизор</h3>
             <div>
                 <div class="text">
                     Диогональ
                 </div>
                 <select name="diog">
                     <option value="24">24</option>
-                    <option value="ноутбук">32</option>
-                    <option value="Смартфон">38</option>
+                    <option value="32">32</option>
+                    <option value="38">38</option>
                 </select>
             </div>
 
@@ -194,20 +195,80 @@
                     <option value="Нет">Нет</option>
                 </select>
             </div>
+
             <div>
                 <div class="text">
                     Смарт-TV
                 </div>
                 <input type="checkbox" name="smart-tv" value="true">
             </div>
-        </div>
+            <button class="smallForm">Сохранить</button>
+        </form>
 
-        <div class="selNotebuk">
+        <form data-section="notebook" class="sel">
+            <h3>Ноутбук</h3>
+            <div>
+                <div class="text">
+                    Диогональ
+                </div>
+                <select name="diog">
+                    <option value="13">13</option>
+                    <option value="15">15</option>
+                    <option value="17">17</option>
+                </select>
+            </div>
 
-        </div>
-        <div class="selSmart">
+            <div>
+                <div class="text">
+                    ОЗУ
+                </div>
+                <select name="memory">
+                    <option value="DDR2">DDR2</option>
+                    <option value="DDR3">DDR3</option>
+                    <option value="DDR4">DDR4</option>
+                </select>
+            </div>
 
-        </div>
+            <div>
+                <div class="text">
+                    Привод
+                </div>
+                <input type="checkbox" name="DVD" value="true">
+            </div>
+            <button class="smallForm">Сохранить</button>
+        </form>
+        <form data-section="smart" class="sel">
+            <h3>Смартфон</h3>
+            <div>
+                <div class="text">
+                    Диогональ
+                </div>
+                <select name="diog">
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="5">6</option>
+                </select>
+            </div>
+
+            <div>
+                <div class="text">
+                    Камера
+                </div>
+                <select name="cam">
+                    <option value="8mpx">8mpx</option>
+                    <option value="16mpx">8mpx</option>
+                    <option value="32mpx">32mpx</option>
+                </select>
+            </div>
+
+            <div>
+                <div class="text">
+                    Наушники
+                </div>
+                <input type="checkbox" name="headphones" value="true">
+            </div>
+            <button class="smallForm">Сохранить</button>
+        </form>
     </div>
     <script src="main.js"></script>
 </body>

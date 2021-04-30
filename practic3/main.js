@@ -1,12 +1,15 @@
 'use strict';
 const allTitle = document.querySelectorAll('.title');
 const allTabsInfo = document.querySelectorAll('.tabInfo');
-const formHr = document.forms.hr
+const formHr = document.forms.hr;
 const saveHr = document.querySelector('#saveHr');
 const getObj = document.querySelector('#getObj');
 const closeModal = document.querySelector('.close');
 const modal = document.querySelector('.modalChar');
 const chaSret = document.querySelector('.charSet');
+const changeModal = document.querySelector('#changeModal');
+const selItem = document.querySelectorAll('.sel');
+const smallForm = document.querySelectorAll('.smallForm');
 const globalData = {
     hrData: [],
     filData: [],
@@ -97,12 +100,31 @@ getObj.addEventListener('click', () => globalData.hrData.forEach(el => el.create
 /*
     MODAL
 */
+changeModal.addEventListener('change', () => {
+    selItem.forEach(div => {
+        div.style.zIndex = 0;
+        console.log(div)
+        if (div.dataset.section === changeModal.value) {
+            div.style.zIndex = 1;
+        }
+        console.log(div)
+    });
+
+});
+
+
 
 chaSret.addEventListener('click', (e) => {
     e.preventDefault();
     modal.classList.add('modalChar_active');
 });
 closeModal.addEventListener('click', () => modal.classList.remove('modalChar_active'));
+
+smallForm.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+    })
+});
 
 /*
     MODAL
