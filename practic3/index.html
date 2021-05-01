@@ -177,7 +177,60 @@
             </form>
             <button class="save">Сохранить</button>
         </div>
-        <div data-tabs="3" class="tabInfo">logistic</div>
+        <div data-tabs="3" class="tabInfo">
+            <form action="#" name="logistic">
+                
+                 <div>
+                 <div class="text">
+                     Ширина
+                 </div>
+                 <input type="number" name="width" />
+             </div>
+             
+             <div>
+             <div class="text">
+                 Высота
+             </div>
+             <input type="number" name="height" />
+             </div>
+            <div>
+                <div class="text">
+                    Вес
+                </div>
+                <input type="number" name="weight" />
+            </div>
+            
+            <div>
+                <div class="text">
+                    Количество
+                </div>
+                <input type="number" name="quantity" />
+            </div>
+             <div>
+                <div class="text">
+                    Тип перевозки
+                </div>
+                <select name="shipping">
+                    <option value="Авиа">Авиа</option>
+                    <option value="Наземный">Наземный</option>
+                    <option value="Морской">Морской</option>
+                </select>
+            </div>
+             <div>
+                 <div class="text">
+                     Дата перевозки
+                 </div>
+                 <input type="date" name="dateTransp" />
+             </div>
+                 <div>
+                 <div class="text">
+                     Стоимость товара
+                 </div>
+                 <input type="number" name="sumMoney" />
+             </div>
+            <button class="save">Сохранить</button>
+            </form>
+        </div>
         <div data-tabs="4" id="test" class="tabInfo">Директор
             <button id="getObj">тест</button>
         </div>
