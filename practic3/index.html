@@ -27,7 +27,7 @@
     </div>
     <div class="wrapperInfo">
         <div data-tabs="1" class="tabInfo infoActive">
-            <form action="#" method="get" accept-charset="utf-8" name="hr">
+            <form action="#" method="get" accept-charset="utf-8" name="hrData">
 
                 <div>
                     <div class="text">
@@ -97,13 +97,13 @@
                     <div class="text">
                         Дата рождения
                     </div>
-                    <input type="date" name="birthda" />
+                    <input type="date" name="birthday" />
                 </div>
                 <button class="save" id="saveHr">Сохранить</button>
             </form>
         </div>
         <div data-tabs="2" class="tabInfo">
-            <form action="#" name="filling">
+            <form action="#" name="filData">
                 <div>
                     <div class="text">
                         Тип товара
@@ -162,6 +162,7 @@
                 </div>
 
                 <button class="charSet">Характеристики</button>
+                <input id="objChar" hidden type="text" name="char" />
                  <div>
                      <div class="text">
                          Дата добавления
@@ -174,11 +175,12 @@
                       </div>
                      <textarea name="recall" id= rows="8" cols="40"></textarea>
                   </div>
+                     <button class="save">Сохранить</button>
+
             </form>
-            <button class="save">Сохранить</button>
         </div>
         <div data-tabs="3" class="tabInfo">
-            <form action="#" name="logistic">
+            <form action="#" name="logData">
                 
                  <div>
                  <div class="text">
@@ -233,6 +235,15 @@
         </div>
         <div data-tabs="4" id="test" class="tabInfo">Директор
             <button id="getObj">тест</button>
+            <div class="getInfo">
+                <button ></button>
+            </div>
+            <div class="getInfo">
+                <button></button>
+            </div>
+            <div class="getInfo">
+                <button></button>
+            </div>
         </div>
     </div>
     <div class="modalChar">
