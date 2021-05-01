@@ -12,6 +12,7 @@ const selItem = document.querySelectorAll('.sel');
 const smallForm = document.querySelectorAll('.smallForm');
 
 const sumPrice = document.querySelector('#sumPrice');//для слежки
+const quantity  = document.querySelector("quantity");
 
 
 const globalData = {
