@@ -16,7 +16,7 @@ const globalData = {
     logData: [],
 };
 
-const char = {};
+const charTemp = [];
 
 /*
     Tabs
@@ -115,12 +115,15 @@ changeModal.addEventListener('change', () => {
 chaSret.addEventListener('click', (e) => {
     e.preventDefault();
     modal.classList.add('modalChar_active');
+    charTemp.pop();
 });
 closeModal.addEventListener('click', () => modal.classList.remove('modalChar_active'));
 
 smallForm.forEach(btn => {
     btn.addEventListener('click', function(e) {
         e.preventDefault();
+        pushData(this.parentElement, charTemp)
+        console.log(charTemp)
     });
 });
 
