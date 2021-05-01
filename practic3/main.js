@@ -10,6 +10,10 @@ const chaSret = document.querySelector('.charSet');
 const changeModal = document.querySelector('#changeModal');
 const selItem = document.querySelectorAll('.sel');
 const smallForm = document.querySelectorAll('.smallForm');
+
+const sumPrice = document.querySelector('#sumPrice');//для слежки
+
+
 const globalData = {
     hrData: [],
     filData: [],
