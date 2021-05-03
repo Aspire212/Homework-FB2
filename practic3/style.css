@@ -113,6 +113,20 @@ form>div {
 .close:hover {
     color: red;
 }
-button{
+
+button {
     cursor: pointer;
+}
+
+.getInfo ul {
+    margin: 20px;
+}
+
+ul li>ul {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+
+#getObj {
+    margin-top: 100px;
 }
