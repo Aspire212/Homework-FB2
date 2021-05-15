@@ -39,8 +39,8 @@ addItem.onclick = () => {
             'Рецепт приготовления': recipe.value,
         }
         drinkStorage.addValue(addName.value, valobj);
+        localStorage.setItem('drinkStorage', JSON.stringify(drinkStorage));
         clearForm();
-        console.log(drinkStorage)
         addName.placeholder = "";
     } else {
         clearForm();
@@ -49,25 +49,31 @@ addItem.onclick = () => {
 }
 
 searchList.onclick = () => {
-    if (drinkStorage.hasOwnProperty(searchName.value)) {
-        searchRecipe.innerHTML = "";
-        for (let key in drinkStorage.getValue(searchName.value)) {
-            let li = document.createElement('li');
-            li.innerHTML = `${key} : ${drinkStorage.getValue(searchName.value)[key]} `;
-            searchRecipe.append(li);
+    let temp = JSON.parse(localStorage.getItem('drinkStorage'))
+        //console.log(val)
+    Object.keys(temp).forEach(drink => {
+        if (drink === searchName.value) {
+            Object.keys(temp[drink]).forEach(key => {
+                let li = document.createElement('li');
+                console.log(`${key} : ${temp[drink][key]} `)
+                li.textContent = `${key} : ${temp[drink][key]} `;
+                console.log(searchRecipe)
+                searchRecipe.append(li);
+            })
+        } else {
+            searchRecipe.innerHTML = undefined;
         }
-    } else {
-        searchRecipe.innerHTML = undefined;
-    }
-    searchName.value = '';
+    });
 }
 
 listItem.onclick = () => {
-    if (drinkStorage.getKeys().length < 1) {
+    if (localStorage.length < 1) {
         list.innerHTML = 'В каталоге нет рецептов!'
     } else {
         list.innerHTML = "";
-        drinkStorage.getKeys().forEach(el => {
+        console.log(localStorage.getItem('drinkStorage'))
+        let temp = JSON.parse(localStorage.getItem('drinkStorage'))
+        Object.keys(temp).forEach(el => {
             let li = document.createElement('li');
             li.innerHTML = el;
             list.append(li);
@@ -76,11 +82,12 @@ listItem.onclick = () => {
 }
 
 deleteItem.onclick = () => {
-    if (!drinkStorage.hasOwnProperty(deleteName.value)) {
+    let temp = JSON.parse(localStorage.getItem('drinkStorage'))
+    if (!temp.hasOwnProperty(deleteName.value)) {
         deleteName.value = '';
         message.innerHTML = false;
     } else {
-        drinkStorage.deleteValue(deleteName.value);
+        Object.keys(temp).map(el => el !== deleteName.value)
         deleteName.value = '';
         message.innerHTML = true;
     }
